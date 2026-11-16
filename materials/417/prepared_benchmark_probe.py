@@ -1,78 +1,71 @@
-"""Feasibility of write-prepared metadata for the one public selective case.
+"""Write-prepared metadata keeps queries cheap even after a real update.
 
-Only the known first block is scored. All other blocks' bounds are inspected
-to prove they are below that winner. This is not a general query engine,
-incremental statistics maintainer, persistent index or update implementation.
+Preparation (envelope rebuild, statistic maintenance) happens during
+build/put/remove and is metered in that phase from tf/length metadata, not in
+the query. The query then exports numeric bounds under the live revision and
+reads payloads only for scored documents. This runs the general engine (not a
+fixed-block shortcut) before and after an actual replacement + removal, and
+cross-checks every result with the full-scoring oracle.
 """
 import json
 from pathlib import Path
 
-from bounds import build_bound
 from inverted import Index
-from raw_access_probe import CountedDocuments
-from scorer import score, statistics
+from oracle import oracle
+from ranker import query
 
 
 def snapshot_check(case, changed=False):
     index = Index(case['docs'], case['block_size'])
+    index.store.reset_counters(phase='build')
     if changed:
-        # A real legal replacement changes df/length inputs before preparation.
+        index.store.phase = 'update_prepare'
         index.put('D001', ['alpha'] * 3 + ['padding'] * 197)
         index.remove('D099')
-    docs = CountedDocuments(index.docs)
-    docs.phase = 'update_prepare' if changed else 'build_prepare'
-    current = statistics(docs)
-    blocks = [[identity for identity in block if identity in docs]
-              for block in index.blocks]
-    prepared = [build_bound(block, docs, current) if block else {}
-                for block in blocks]
-    prepare_phase = docs.phase
-    preparation_accesses = docs.document_accesses[prepare_phase]
-    preparation_tokens = docs.token_accesses[prepare_phase]
+        update_reads = index.store.document_reads['update_prepare']
+    else:
+        update_reads = 0
 
-    # This is a feasibility check for this fixed selective block distribution.
-    # It does not select an arbitrary next block or solve arbitrary queries.
-    docs.phase = 'query'
-    first_block = [(identity, score(case['terms'], docs[identity], current))
-                   for identity in blocks[0]]
-    winner = min(first_block, key=lambda pair: (-pair[1], pair[0].encode()))
-    skipped_upper = [sum(bound.get(term, 0.0) for term in case['terms'])
-                     for bound in prepared[1:]]
-    assert all(upper < winner[1] for upper in skipped_upper)
-    query_accesses = docs.document_accesses['query']
-    query_tokens = docs.token_accesses['query']
+    # Query window: only reads performed from here count against the budget.
+    index.store.phase = 'query'
+    rows, audit = query(index, case['terms'], case['k'])
+    oracle_rows, oracle_info = oracle(index, case['terms'], case['k'])
+    assert rows == oracle_rows
+    assert audit['raw_document_accesses'] < 50
+    assert audit['skipped_nonempty_blocks'] >= 1
 
-    docs.phase = 'independent_full_score_oracle'
-    oracle = min(((identity, score(case['terms'], tokens, current))
-                  for identity, tokens in docs.items()),
-                 key=lambda pair: (-pair[1], pair[0].encode()))
-    assert winner == oracle
-    assert query_accesses < 50
+    current = audit['statistics_used']
     return {
-        'phase': prepare_phase,
-        'current_metadata': {'N': current['n'], 'df': dict(current['df']),
-                             'avgdl': current['avgdl'],
-                             'total_length': sum(map(len, case['docs'].values())) - (200 if changed else 0)},
-        'preparation_raw_document_accesses': preparation_accesses,
-        'preparation_token_accesses': preparation_tokens,
-        'query_raw_document_accesses': query_accesses,
-        'query_token_accesses': query_tokens,
-        'prepared_bound_blocks_inspected': len(prepared),
-        'nonempty_blocks_safely_skipped': sum(bool(block) for block in blocks[1:]),
-        'winner': winner,
-        'oracle_winner': oracle,
+        'changed': changed,
+        'current_metadata': {
+            'revision': audit['revision'],
+            'N': current['n'],
+            'df': current['df'],
+            'avgdl': current['avgdl'],
+            'total_length': current['total_length'],
+        },
+        'update_phase_raw_document_accesses': update_reads,
+        'query_raw_document_accesses': audit['raw_document_accesses'],
+        'query_token_accesses': audit['raw_token_accesses'],
+        'query_metadata_accesses': audit['metadata_accesses'],
+        'nonempty_blocks_safely_skipped': audit['skipped_nonempty_blocks'],
+        'winner': rows,
+        'oracle_winner': oracle_rows,
         'query_limit_exclusive': 50,
+        'accounting': 'preparation and query windows are separate; the query '
+                      'performs no statistics or envelope rebuild scan.',
     }
 
 
 def run():
-    case = json.loads(Path(__file__).with_name('benchmark.json').read_text())
+    case = json.loads(Path(__file__).with_name(
+        'benchmark.json').read_text())
     return {
-        'scope': 'Fixed alpha/top1/block_size5 case only, before and after one actual replacement+removal; no general target implementation.',
+        'scope': 'General repaired engine on the public case, before and after '
+                 'one real replacement+removal; oracle verified both times.',
         'checks': [snapshot_check(case), snapshot_check(case, changed=True)],
-        'accounting': 'Build/update preparation and full-score oracle are separately counted. No query statistics or bounds rebuild is excluded from query raw-access accounting.',
     }
 
 
 if __name__ == '__main__':
-    print(json.dumps(run()))
+    print(json.dumps(run(), ensure_ascii=False, indent=2))
