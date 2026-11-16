@@ -1,0 +1,51 @@
+{
+  "index": [
+    "tenant",
+    "items.sku",
+    "items.qty"
+  ],
+  "documents": [
+    {
+      "_id": "mixed",
+      "tenant": "t",
+      "items": [
+        {
+          "sku": "A",
+          "qty": 1
+        },
+        {
+          "sku": "B",
+          "qty": 5
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "_id": "same",
+      "tenant": "t",
+      "items": [
+        {
+          "sku": "A",
+          "qty": 5
+        }
+      ],
+      "enabled": true
+    }
+  ],
+  "queries": [
+    {
+      "elemMatch": [
+        {
+          "field": "items.sku",
+          "op": "eq",
+          "value": "A"
+        },
+        {
+          "field": "items.qty",
+          "op": "eq",
+          "value": 5
+        }
+      ]
+    }
+  ]
+}

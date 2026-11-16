@@ -1,0 +1,1 @@
+`python3 probe.py` builds and queries the real current compound index. The normal one-element document works; cartesian extraction creates a nonexistent same-element pair, and current put leaves physical keys stale. No target correlated index or planner is included.
