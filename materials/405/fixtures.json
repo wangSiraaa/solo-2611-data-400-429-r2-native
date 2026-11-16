@@ -1,0 +1,40 @@
+{
+  "overlap": [
+    {
+      "kind": "put",
+      "key": 5,
+      "value": "a",
+      "seq": 1
+    },
+    {
+      "kind": "erase",
+      "lo": 0,
+      "hi": 10,
+      "seq": 2
+    },
+    {
+      "kind": "put",
+      "key": 5,
+      "value": "b",
+      "seq": 3
+    },
+    {
+      "kind": "erase",
+      "lo": 5,
+      "hi": 8,
+      "seq": 4
+    },
+    {
+      "kind": "put",
+      "key": 8,
+      "value": "edge",
+      "seq": 5
+    }
+  ],
+  "wide_range": {
+    "kind": "erase",
+    "lo": -1000000000,
+    "hi": 1000000000,
+    "seq": 6
+  }
+}
