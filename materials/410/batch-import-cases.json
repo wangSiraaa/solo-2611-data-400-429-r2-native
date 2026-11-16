@@ -1,0 +1,7 @@
+{
+  "initial": [{"row_id":"a","category":10,"amount":100},{"row_id":"b","category":20,"amount":200}],
+  "swap": [{"op":"put","row_id":"a","category":20,"amount":110},{"op":"put","row_id":"b","category":10,"amount":210}],
+  "late_invalid": [{"op":"put","row_id":"a","category":20,"amount":110},{"op":"unknown"}],
+  "same_identity": [{"op":"delete","row_id":"a"},{"op":"put","row_id":"a","category":30,"amount":300}],
+  "expected": {"swap_commit_delta":1,"late_invalid_state_unchanged":true,"same_identity_commit_delta":1}
+}

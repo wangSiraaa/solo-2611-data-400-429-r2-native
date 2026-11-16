@@ -1,0 +1,1228 @@
+{
+  "seed": [
+    {
+      "row_id": "r000",
+      "category": 0,
+      "amount": 0
+    },
+    {
+      "row_id": "r001",
+      "category": 1,
+      "amount": 1
+    },
+    {
+      "row_id": "r002",
+      "category": 2,
+      "amount": 2
+    },
+    {
+      "row_id": "r003",
+      "category": 3,
+      "amount": 3
+    },
+    {
+      "row_id": "r004",
+      "category": 4,
+      "amount": 4
+    },
+    {
+      "row_id": "r005",
+      "category": 5,
+      "amount": 5
+    },
+    {
+      "row_id": "r006",
+      "category": 6,
+      "amount": 6
+    },
+    {
+      "row_id": "r007",
+      "category": 7,
+      "amount": 7
+    },
+    {
+      "row_id": "r008",
+      "category": 8,
+      "amount": 8
+    },
+    {
+      "row_id": "r009",
+      "category": 9,
+      "amount": 9
+    },
+    {
+      "row_id": "r010",
+      "category": 10,
+      "amount": 10
+    },
+    {
+      "row_id": "r011",
+      "category": 11,
+      "amount": 11
+    },
+    {
+      "row_id": "r012",
+      "category": 12,
+      "amount": 12
+    },
+    {
+      "row_id": "r013",
+      "category": 13,
+      "amount": 13
+    },
+    {
+      "row_id": "r014",
+      "category": 14,
+      "amount": 14
+    },
+    {
+      "row_id": "r015",
+      "category": 15,
+      "amount": 15
+    },
+    {
+      "row_id": "r016",
+      "category": 16,
+      "amount": 16
+    },
+    {
+      "row_id": "r017",
+      "category": 17,
+      "amount": 17
+    },
+    {
+      "row_id": "r018",
+      "category": 18,
+      "amount": 18
+    },
+    {
+      "row_id": "r019",
+      "category": 19,
+      "amount": 19
+    },
+    {
+      "row_id": "r020",
+      "category": 20,
+      "amount": 20
+    },
+    {
+      "row_id": "r021",
+      "category": 21,
+      "amount": 21
+    },
+    {
+      "row_id": "r022",
+      "category": 22,
+      "amount": 22
+    },
+    {
+      "row_id": "r023",
+      "category": 23,
+      "amount": 23
+    },
+    {
+      "row_id": "r024",
+      "category": 24,
+      "amount": 24
+    },
+    {
+      "row_id": "r025",
+      "category": 25,
+      "amount": 25
+    },
+    {
+      "row_id": "r026",
+      "category": 26,
+      "amount": 26
+    },
+    {
+      "row_id": "r027",
+      "category": 27,
+      "amount": 27
+    },
+    {
+      "row_id": "r028",
+      "category": 28,
+      "amount": 28
+    },
+    {
+      "row_id": "r029",
+      "category": 29,
+      "amount": 29
+    },
+    {
+      "row_id": "r030",
+      "category": 30,
+      "amount": 30
+    },
+    {
+      "row_id": "r031",
+      "category": 31,
+      "amount": 31
+    },
+    {
+      "row_id": "r032",
+      "category": 32,
+      "amount": 32
+    },
+    {
+      "row_id": "r033",
+      "category": 33,
+      "amount": 33
+    },
+    {
+      "row_id": "r034",
+      "category": 34,
+      "amount": 34
+    },
+    {
+      "row_id": "r035",
+      "category": 35,
+      "amount": 35
+    },
+    {
+      "row_id": "r036",
+      "category": 36,
+      "amount": 36
+    },
+    {
+      "row_id": "r037",
+      "category": 37,
+      "amount": 37
+    },
+    {
+      "row_id": "r038",
+      "category": 38,
+      "amount": 38
+    },
+    {
+      "row_id": "r039",
+      "category": 39,
+      "amount": 39
+    },
+    {
+      "row_id": "r040",
+      "category": 40,
+      "amount": 40
+    },
+    {
+      "row_id": "r041",
+      "category": 41,
+      "amount": 41
+    },
+    {
+      "row_id": "r042",
+      "category": 42,
+      "amount": 42
+    },
+    {
+      "row_id": "r043",
+      "category": 43,
+      "amount": 43
+    },
+    {
+      "row_id": "r044",
+      "category": 44,
+      "amount": 44
+    },
+    {
+      "row_id": "r045",
+      "category": 45,
+      "amount": 45
+    },
+    {
+      "row_id": "r046",
+      "category": 46,
+      "amount": 46
+    },
+    {
+      "row_id": "r047",
+      "category": 47,
+      "amount": 47
+    },
+    {
+      "row_id": "r048",
+      "category": 48,
+      "amount": 48
+    },
+    {
+      "row_id": "r049",
+      "category": 49,
+      "amount": 49
+    },
+    {
+      "row_id": "r050",
+      "category": 50,
+      "amount": 50
+    },
+    {
+      "row_id": "r051",
+      "category": 51,
+      "amount": 51
+    },
+    {
+      "row_id": "r052",
+      "category": 52,
+      "amount": 52
+    },
+    {
+      "row_id": "r053",
+      "category": 53,
+      "amount": 53
+    },
+    {
+      "row_id": "r054",
+      "category": 54,
+      "amount": 54
+    },
+    {
+      "row_id": "r055",
+      "category": 55,
+      "amount": 55
+    },
+    {
+      "row_id": "r056",
+      "category": 56,
+      "amount": 56
+    },
+    {
+      "row_id": "r057",
+      "category": 57,
+      "amount": 57
+    },
+    {
+      "row_id": "r058",
+      "category": 58,
+      "amount": 58
+    },
+    {
+      "row_id": "r059",
+      "category": 59,
+      "amount": 59
+    },
+    {
+      "row_id": "r060",
+      "category": 60,
+      "amount": 60
+    },
+    {
+      "row_id": "r061",
+      "category": 61,
+      "amount": 61
+    },
+    {
+      "row_id": "r062",
+      "category": 62,
+      "amount": 62
+    },
+    {
+      "row_id": "r063",
+      "category": 63,
+      "amount": 63
+    },
+    {
+      "row_id": "r064",
+      "category": 64,
+      "amount": 64
+    },
+    {
+      "row_id": "r065",
+      "category": 65,
+      "amount": 65
+    },
+    {
+      "row_id": "r066",
+      "category": 66,
+      "amount": 66
+    },
+    {
+      "row_id": "r067",
+      "category": 67,
+      "amount": 67
+    },
+    {
+      "row_id": "r068",
+      "category": 68,
+      "amount": 68
+    },
+    {
+      "row_id": "r069",
+      "category": 69,
+      "amount": 69
+    },
+    {
+      "row_id": "r070",
+      "category": 70,
+      "amount": 70
+    },
+    {
+      "row_id": "r071",
+      "category": 71,
+      "amount": 71
+    },
+    {
+      "row_id": "r072",
+      "category": 72,
+      "amount": 72
+    },
+    {
+      "row_id": "r073",
+      "category": 73,
+      "amount": 73
+    },
+    {
+      "row_id": "r074",
+      "category": 74,
+      "amount": 74
+    },
+    {
+      "row_id": "r075",
+      "category": 75,
+      "amount": 75
+    },
+    {
+      "row_id": "r076",
+      "category": 76,
+      "amount": 76
+    },
+    {
+      "row_id": "r077",
+      "category": 77,
+      "amount": 77
+    },
+    {
+      "row_id": "r078",
+      "category": 78,
+      "amount": 78
+    },
+    {
+      "row_id": "r079",
+      "category": 79,
+      "amount": 79
+    },
+    {
+      "row_id": "r080",
+      "category": 80,
+      "amount": 80
+    },
+    {
+      "row_id": "r081",
+      "category": 81,
+      "amount": 81
+    },
+    {
+      "row_id": "r082",
+      "category": 82,
+      "amount": 82
+    },
+    {
+      "row_id": "r083",
+      "category": 83,
+      "amount": 83
+    },
+    {
+      "row_id": "r084",
+      "category": 84,
+      "amount": 84
+    },
+    {
+      "row_id": "r085",
+      "category": 85,
+      "amount": 85
+    },
+    {
+      "row_id": "r086",
+      "category": 86,
+      "amount": 86
+    },
+    {
+      "row_id": "r087",
+      "category": 87,
+      "amount": 87
+    },
+    {
+      "row_id": "r088",
+      "category": 88,
+      "amount": 88
+    },
+    {
+      "row_id": "r089",
+      "category": 89,
+      "amount": 89
+    },
+    {
+      "row_id": "r090",
+      "category": 90,
+      "amount": 90
+    },
+    {
+      "row_id": "r091",
+      "category": 91,
+      "amount": 91
+    },
+    {
+      "row_id": "r092",
+      "category": 92,
+      "amount": 92
+    },
+    {
+      "row_id": "r093",
+      "category": 93,
+      "amount": 93
+    },
+    {
+      "row_id": "r094",
+      "category": 94,
+      "amount": 94
+    },
+    {
+      "row_id": "r095",
+      "category": 95,
+      "amount": 95
+    },
+    {
+      "row_id": "r096",
+      "category": 96,
+      "amount": 96
+    },
+    {
+      "row_id": "r097",
+      "category": 97,
+      "amount": 97
+    },
+    {
+      "row_id": "r098",
+      "category": 98,
+      "amount": 98
+    },
+    {
+      "row_id": "r099",
+      "category": 99,
+      "amount": 99
+    },
+    {
+      "row_id": "r100",
+      "category": 100,
+      "amount": 100
+    },
+    {
+      "row_id": "r101",
+      "category": 101,
+      "amount": 101
+    },
+    {
+      "row_id": "r102",
+      "category": 102,
+      "amount": 102
+    },
+    {
+      "row_id": "r103",
+      "category": 103,
+      "amount": 103
+    },
+    {
+      "row_id": "r104",
+      "category": 104,
+      "amount": 104
+    },
+    {
+      "row_id": "r105",
+      "category": 105,
+      "amount": 105
+    },
+    {
+      "row_id": "r106",
+      "category": 106,
+      "amount": 106
+    },
+    {
+      "row_id": "r107",
+      "category": 107,
+      "amount": 107
+    },
+    {
+      "row_id": "r108",
+      "category": 108,
+      "amount": 108
+    },
+    {
+      "row_id": "r109",
+      "category": 109,
+      "amount": 109
+    },
+    {
+      "row_id": "r110",
+      "category": 110,
+      "amount": 110
+    },
+    {
+      "row_id": "r111",
+      "category": 111,
+      "amount": 111
+    },
+    {
+      "row_id": "r112",
+      "category": 112,
+      "amount": 112
+    },
+    {
+      "row_id": "r113",
+      "category": 113,
+      "amount": 113
+    },
+    {
+      "row_id": "r114",
+      "category": 114,
+      "amount": 114
+    },
+    {
+      "row_id": "r115",
+      "category": 115,
+      "amount": 115
+    },
+    {
+      "row_id": "r116",
+      "category": 116,
+      "amount": 116
+    },
+    {
+      "row_id": "r117",
+      "category": 117,
+      "amount": 117
+    },
+    {
+      "row_id": "r118",
+      "category": 118,
+      "amount": 118
+    },
+    {
+      "row_id": "r119",
+      "category": 119,
+      "amount": 119
+    },
+    {
+      "row_id": "r120",
+      "category": 120,
+      "amount": 120
+    },
+    {
+      "row_id": "r121",
+      "category": 121,
+      "amount": 121
+    },
+    {
+      "row_id": "r122",
+      "category": 122,
+      "amount": 122
+    },
+    {
+      "row_id": "r123",
+      "category": 123,
+      "amount": 123
+    },
+    {
+      "row_id": "r124",
+      "category": 124,
+      "amount": 124
+    },
+    {
+      "row_id": "r125",
+      "category": 125,
+      "amount": 125
+    },
+    {
+      "row_id": "r126",
+      "category": 126,
+      "amount": 126
+    },
+    {
+      "row_id": "r127",
+      "category": 127,
+      "amount": 127
+    },
+    {
+      "row_id": "r128",
+      "category": 128,
+      "amount": 128
+    },
+    {
+      "row_id": "r129",
+      "category": 129,
+      "amount": 129
+    },
+    {
+      "row_id": "r130",
+      "category": 130,
+      "amount": 130
+    },
+    {
+      "row_id": "r131",
+      "category": 131,
+      "amount": 131
+    },
+    {
+      "row_id": "r132",
+      "category": 132,
+      "amount": 132
+    },
+    {
+      "row_id": "r133",
+      "category": 133,
+      "amount": 133
+    },
+    {
+      "row_id": "r134",
+      "category": 134,
+      "amount": 134
+    },
+    {
+      "row_id": "r135",
+      "category": 135,
+      "amount": 135
+    },
+    {
+      "row_id": "r136",
+      "category": 136,
+      "amount": 136
+    },
+    {
+      "row_id": "r137",
+      "category": 137,
+      "amount": 137
+    },
+    {
+      "row_id": "r138",
+      "category": 138,
+      "amount": 138
+    },
+    {
+      "row_id": "r139",
+      "category": 139,
+      "amount": 139
+    },
+    {
+      "row_id": "r140",
+      "category": 140,
+      "amount": 140
+    },
+    {
+      "row_id": "r141",
+      "category": 141,
+      "amount": 141
+    },
+    {
+      "row_id": "r142",
+      "category": 142,
+      "amount": 142
+    },
+    {
+      "row_id": "r143",
+      "category": 143,
+      "amount": 143
+    },
+    {
+      "row_id": "r144",
+      "category": 144,
+      "amount": 144
+    },
+    {
+      "row_id": "r145",
+      "category": 145,
+      "amount": 145
+    },
+    {
+      "row_id": "r146",
+      "category": 146,
+      "amount": 146
+    },
+    {
+      "row_id": "r147",
+      "category": 147,
+      "amount": 147
+    },
+    {
+      "row_id": "r148",
+      "category": 148,
+      "amount": 148
+    },
+    {
+      "row_id": "r149",
+      "category": 149,
+      "amount": 149
+    },
+    {
+      "row_id": "r150",
+      "category": 150,
+      "amount": 150
+    },
+    {
+      "row_id": "r151",
+      "category": 151,
+      "amount": 151
+    },
+    {
+      "row_id": "r152",
+      "category": 152,
+      "amount": 152
+    },
+    {
+      "row_id": "r153",
+      "category": 153,
+      "amount": 153
+    },
+    {
+      "row_id": "r154",
+      "category": 154,
+      "amount": 154
+    },
+    {
+      "row_id": "r155",
+      "category": 155,
+      "amount": 155
+    },
+    {
+      "row_id": "r156",
+      "category": 156,
+      "amount": 156
+    },
+    {
+      "row_id": "r157",
+      "category": 157,
+      "amount": 157
+    },
+    {
+      "row_id": "r158",
+      "category": 158,
+      "amount": 158
+    },
+    {
+      "row_id": "r159",
+      "category": 159,
+      "amount": 159
+    },
+    {
+      "row_id": "r160",
+      "category": 160,
+      "amount": 160
+    },
+    {
+      "row_id": "r161",
+      "category": 161,
+      "amount": 161
+    },
+    {
+      "row_id": "r162",
+      "category": 162,
+      "amount": 162
+    },
+    {
+      "row_id": "r163",
+      "category": 163,
+      "amount": 163
+    },
+    {
+      "row_id": "r164",
+      "category": 164,
+      "amount": 164
+    },
+    {
+      "row_id": "r165",
+      "category": 165,
+      "amount": 165
+    },
+    {
+      "row_id": "r166",
+      "category": 166,
+      "amount": 166
+    },
+    {
+      "row_id": "r167",
+      "category": 167,
+      "amount": 167
+    },
+    {
+      "row_id": "r168",
+      "category": 168,
+      "amount": 168
+    },
+    {
+      "row_id": "r169",
+      "category": 169,
+      "amount": 169
+    },
+    {
+      "row_id": "r170",
+      "category": 170,
+      "amount": 170
+    },
+    {
+      "row_id": "r171",
+      "category": 171,
+      "amount": 171
+    },
+    {
+      "row_id": "r172",
+      "category": 172,
+      "amount": 172
+    },
+    {
+      "row_id": "r173",
+      "category": 173,
+      "amount": 173
+    },
+    {
+      "row_id": "r174",
+      "category": 174,
+      "amount": 174
+    },
+    {
+      "row_id": "r175",
+      "category": 175,
+      "amount": 175
+    },
+    {
+      "row_id": "r176",
+      "category": 176,
+      "amount": 176
+    },
+    {
+      "row_id": "r177",
+      "category": 177,
+      "amount": 177
+    },
+    {
+      "row_id": "r178",
+      "category": 178,
+      "amount": 178
+    },
+    {
+      "row_id": "r179",
+      "category": 179,
+      "amount": 179
+    },
+    {
+      "row_id": "r180",
+      "category": 180,
+      "amount": 180
+    },
+    {
+      "row_id": "r181",
+      "category": 181,
+      "amount": 181
+    },
+    {
+      "row_id": "r182",
+      "category": 182,
+      "amount": 182
+    },
+    {
+      "row_id": "r183",
+      "category": 183,
+      "amount": 183
+    },
+    {
+      "row_id": "r184",
+      "category": 184,
+      "amount": 184
+    },
+    {
+      "row_id": "r185",
+      "category": 185,
+      "amount": 185
+    },
+    {
+      "row_id": "r186",
+      "category": 186,
+      "amount": 186
+    },
+    {
+      "row_id": "r187",
+      "category": 187,
+      "amount": 187
+    },
+    {
+      "row_id": "r188",
+      "category": 188,
+      "amount": 188
+    },
+    {
+      "row_id": "r189",
+      "category": 189,
+      "amount": 189
+    },
+    {
+      "row_id": "r190",
+      "category": 190,
+      "amount": 190
+    },
+    {
+      "row_id": "r191",
+      "category": 191,
+      "amount": 191
+    },
+    {
+      "row_id": "r192",
+      "category": 192,
+      "amount": 192
+    },
+    {
+      "row_id": "r193",
+      "category": 193,
+      "amount": 193
+    },
+    {
+      "row_id": "r194",
+      "category": 194,
+      "amount": 194
+    },
+    {
+      "row_id": "r195",
+      "category": 195,
+      "amount": 195
+    },
+    {
+      "row_id": "r196",
+      "category": 196,
+      "amount": 196
+    },
+    {
+      "row_id": "r197",
+      "category": 197,
+      "amount": 197
+    },
+    {
+      "row_id": "r198",
+      "category": 198,
+      "amount": 198
+    },
+    {
+      "row_id": "r199",
+      "category": 199,
+      "amount": 199
+    },
+    {
+      "row_id": "r200",
+      "category": 200,
+      "amount": 200
+    },
+    {
+      "row_id": "r201",
+      "category": 201,
+      "amount": 201
+    },
+    {
+      "row_id": "r202",
+      "category": 202,
+      "amount": 202
+    },
+    {
+      "row_id": "r203",
+      "category": 203,
+      "amount": 203
+    },
+    {
+      "row_id": "r204",
+      "category": 204,
+      "amount": 204
+    },
+    {
+      "row_id": "r205",
+      "category": 205,
+      "amount": 205
+    },
+    {
+      "row_id": "r206",
+      "category": 206,
+      "amount": 206
+    },
+    {
+      "row_id": "r207",
+      "category": 207,
+      "amount": 207
+    },
+    {
+      "row_id": "r208",
+      "category": 208,
+      "amount": 208
+    },
+    {
+      "row_id": "r209",
+      "category": 209,
+      "amount": 209
+    },
+    {
+      "row_id": "r210",
+      "category": 210,
+      "amount": 210
+    },
+    {
+      "row_id": "r211",
+      "category": 211,
+      "amount": 211
+    },
+    {
+      "row_id": "r212",
+      "category": 212,
+      "amount": 212
+    },
+    {
+      "row_id": "r213",
+      "category": 213,
+      "amount": 213
+    },
+    {
+      "row_id": "r214",
+      "category": 214,
+      "amount": 214
+    },
+    {
+      "row_id": "r215",
+      "category": 215,
+      "amount": 215
+    },
+    {
+      "row_id": "r216",
+      "category": 216,
+      "amount": 216
+    },
+    {
+      "row_id": "r217",
+      "category": 217,
+      "amount": 217
+    },
+    {
+      "row_id": "r218",
+      "category": 218,
+      "amount": 218
+    },
+    {
+      "row_id": "r219",
+      "category": 219,
+      "amount": 219
+    },
+    {
+      "row_id": "r220",
+      "category": 220,
+      "amount": 220
+    },
+    {
+      "row_id": "r221",
+      "category": 221,
+      "amount": 221
+    },
+    {
+      "row_id": "r222",
+      "category": 222,
+      "amount": 222
+    },
+    {
+      "row_id": "r223",
+      "category": 223,
+      "amount": 223
+    },
+    {
+      "row_id": "r224",
+      "category": 224,
+      "amount": 224
+    },
+    {
+      "row_id": "r225",
+      "category": 225,
+      "amount": 225
+    },
+    {
+      "row_id": "r226",
+      "category": 226,
+      "amount": 226
+    },
+    {
+      "row_id": "r227",
+      "category": 227,
+      "amount": 227
+    },
+    {
+      "row_id": "r228",
+      "category": 228,
+      "amount": 228
+    },
+    {
+      "row_id": "r229",
+      "category": 229,
+      "amount": 229
+    },
+    {
+      "row_id": "r230",
+      "category": 230,
+      "amount": 230
+    },
+    {
+      "row_id": "r231",
+      "category": 231,
+      "amount": 231
+    },
+    {
+      "row_id": "r232",
+      "category": 232,
+      "amount": 232
+    },
+    {
+      "row_id": "r233",
+      "category": 233,
+      "amount": 233
+    },
+    {
+      "row_id": "r234",
+      "category": 234,
+      "amount": 234
+    },
+    {
+      "row_id": "r235",
+      "category": 235,
+      "amount": 235
+    },
+    {
+      "row_id": "r236",
+      "category": 236,
+      "amount": 236
+    },
+    {
+      "row_id": "r237",
+      "category": 237,
+      "amount": 237
+    },
+    {
+      "row_id": "r238",
+      "category": 238,
+      "amount": 238
+    },
+    {
+      "row_id": "r239",
+      "category": 239,
+      "amount": 239
+    }
+  ],
+  "after_snapshot": [
+    {
+      "op": "put",
+      "row_id": "r017",
+      "category": 1000,
+      "amount": 999
+    }
+  ],
+  "query": {
+    "snapshot_after_seed": true,
+    "lo": 17,
+    "hi": 18,
+    "projection": [
+      "row_id",
+      "amount"
+    ]
+  },
+  "expected": [
+    [
+      "r017",
+      17
+    ]
+  ],
+  "max_heap_versions_exclusive": 24
+}
