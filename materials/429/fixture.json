@@ -1,0 +1,42 @@
+{
+  "left": [
+    {
+      "id": "l-unmatched",
+      "key": "missing",
+      "score": 100,
+      "cost": 0
+    },
+    {
+      "id": "l1",
+      "key": "x",
+      "score": 10,
+      "cost": 1
+    },
+    {
+      "id": "l2",
+      "key": "x",
+      "score": 9,
+      "cost": 1
+    }
+  ],
+  "right": [
+    {
+      "id": "r-unmatched",
+      "key": "other",
+      "score": 100,
+      "cost": 0
+    },
+    {
+      "id": "r1",
+      "key": "x",
+      "score": 11,
+      "cost": 1
+    },
+    {
+      "id": "r2",
+      "key": "x",
+      "score": 8,
+      "cost": 1
+    }
+  ]
+}

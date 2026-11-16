@@ -1,0 +1,1 @@
+`python3 probe.py` creates actual independent SQLite source indices and exercises public sorted reads. Local top-K truncation drops a legitimate second-best joined pair. The complete tiny join is used only as author oracle, not as the target source-access plan.
