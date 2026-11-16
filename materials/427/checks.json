@@ -1,0 +1,25 @@
+[
+  {
+    "check_id": "a-email",
+    "kind": "not_null",
+    "field": "email",
+    "population": {
+      "op": "eq",
+      "field": "team",
+      "value": "A"
+    }
+  },
+  {
+    "check_id": "b-email-unique",
+    "kind": "unique",
+    "fields": [
+      "email"
+    ],
+    "population": {
+      "op": "eq",
+      "field": "team",
+      "value": "B"
+    },
+    "nulls": "equal"
+  }
+]

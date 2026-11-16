@@ -1,0 +1,1 @@
+`python3 probe.py` executes the real shared scan and compares it with independent per-check filtering. Equal-population fusion works; merging different populations leaks B rows into the A completeness assertion. The general planner and bounded state implementation are left for the task.

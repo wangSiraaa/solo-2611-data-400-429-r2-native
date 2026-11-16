@@ -1,0 +1,3 @@
+{"row_id": "a1", "team": "A", "email": "a", "product": "p1"}
+{"row_id": "b1", "team": "B", "email": null, "product": "p2"}
+{"row_id": "b2", "team": "B", "email": "b", "product": "p3"}

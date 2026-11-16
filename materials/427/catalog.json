@@ -1,0 +1,24 @@
+{
+  "sources": {
+    "events": {
+      "file": "rows.jsonl",
+      "schema": {
+        "row_id": "text",
+        "team": "text",
+        "email": [
+          "text",
+          "null"
+        ],
+        "product": "text"
+      }
+    },
+    "products": {
+      "file": "reference.jsonl",
+      "schema": {
+        "row_id": "text",
+        "product": "text",
+        "active": "bool"
+      }
+    }
+  }
+}
