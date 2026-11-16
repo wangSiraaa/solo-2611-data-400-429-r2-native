@@ -1,0 +1,8 @@
+{
+  "scope":{"amount_lo":0,"amount_hi":100},
+  "orders":[["inside","c1",20,"open","in-note"],["outside","c1",200,"open","out-note"],["closed","c2",30,"closed","closed-note"]],
+  "customers":[["c1","shared","secret-one"],["c2","other","secret-two"]],
+  "empty_edit_expected_order_ids":["closed","inside","outside"],
+  "membership_entering_amount":50,
+  "out_of_scope_target_amount":200
+}

@@ -1,0 +1,44 @@
+{
+  "customers": [
+    {
+      "customer_id": "c1",
+      "name": "Alice",
+      "private_note": "keep-a"
+    },
+    {
+      "customer_id": "c2",
+      "name": "Bob",
+      "private_note": "keep-b"
+    }
+  ],
+  "orders": [
+    {
+      "order_id": "open-a",
+      "customer_id": "c1",
+      "amount": 10,
+      "status": "open",
+      "internal_note": "keep-1"
+    },
+    {
+      "order_id": "open-b",
+      "customer_id": "c1",
+      "amount": 20,
+      "status": "open",
+      "internal_note": "keep-2"
+    },
+    {
+      "order_id": "closed",
+      "customer_id": "c2",
+      "amount": 30,
+      "status": "closed",
+      "internal_note": "keep-3"
+    }
+  ],
+  "conflicting_target_names": {
+    "c1": [
+      "Alice One",
+      "Alice Two"
+    ]
+  },
+  "read_then_unrelated_hidden_change": "UPDATE orders SET internal_note='new-hidden' WHERE order_id='closed'"
+}
