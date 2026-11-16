@@ -1,0 +1,13 @@
+{
+  "source": [
+    {
+      "kind": "sale",
+      "gross": 100,
+      "tax": 7
+    },
+    {
+      "kind": "adjustment",
+      "net": 30
+    }
+  ]
+}

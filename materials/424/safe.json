@@ -1,0 +1,69 @@
+{
+  "nodes": [
+    {
+      "id": "source",
+      "op": "source",
+      "variants": [
+        {
+          "kind": {
+            "type": "literal",
+            "value": "sale"
+          },
+          "gross": {
+            "type": "int"
+          },
+          "tax": {
+            "type": "int"
+          }
+        },
+        {
+          "kind": {
+            "type": "literal",
+            "value": "adjustment"
+          },
+          "net": {
+            "type": "int"
+          }
+        }
+      ]
+    },
+    {
+      "id": "result",
+      "op": "project",
+      "input": "source",
+      "columns": {
+        "amount": {
+          "op": "if",
+          "args": [
+            {
+              "op": "eq",
+              "args": [
+                {
+                  "field": "kind"
+                },
+                {
+                  "const": "sale"
+                }
+              ]
+            },
+            {
+              "op": "add",
+              "args": [
+                {
+                  "field": "gross"
+                },
+                {
+                  "field": "tax"
+                }
+              ]
+            },
+            {
+              "field": "net"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "output": "result"
+}

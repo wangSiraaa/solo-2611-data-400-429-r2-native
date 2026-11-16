@@ -1,0 +1,1 @@
+`python3 probe.py` runs the current source validator, contract compiler and expression executor. The two declared variants are both legal independently of their frequency in a supplied dataset. No target contract solver is included.
