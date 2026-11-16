@@ -1,0 +1,1 @@
+The baseline performs genuine SQLite writes and physical JSON export. `python3 probe.py` shows a correct outer transaction and an inner savepoint export that escapes a later outer rollback. The target nested export queue is not implemented.
