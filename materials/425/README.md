@@ -1,0 +1,1 @@
+The existing query reads real JSON chunk files through ChunkSource. `python3 probe.py` compares a working single-batch path with a legal independent chunking of the same two relations. The probe is a tiny oracle, not an implementation of the target bounded ASOF engine.
