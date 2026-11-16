@@ -1,0 +1,12 @@
+{
+  "nodes": [
+    {
+      "id": "src",
+      "op": "source",
+      "variants": [
+        {"kind": {"type": "literal", "value": "sale"}, "gross": {"type": "int"}}
+      ]
+    }
+  ],
+  "output": "src"
+}

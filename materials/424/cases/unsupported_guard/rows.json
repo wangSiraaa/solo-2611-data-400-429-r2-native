@@ -1,0 +1,6 @@
+{
+  "src": [
+    {"kind": "b", "flag": true},
+    {"kind": "i", "n": 7}
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "sales": [
+    {"kind": "sale", "gross": 100, "tax": 7},
+    {"kind": "sale", "gross": 50, "tax": 3}
+  ],
+  "adjustments": [
+    {"kind": "adjustment", "net": 30}
+  ]
+}

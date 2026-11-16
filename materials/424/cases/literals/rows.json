@@ -1,0 +1,10 @@
+{
+  "src": [
+    {"kind": "b", "flag": false},
+    {"kind": "b", "flag": true},
+    {"kind": "i", "n": 2},
+    {"kind": "i", "n": 1},
+    {"kind": "litb", "flag": true},
+    {"kind": "liti", "n": 1}
+  ]
+}

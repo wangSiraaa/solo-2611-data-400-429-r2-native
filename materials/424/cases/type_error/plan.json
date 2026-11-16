@@ -1,0 +1,21 @@
+{
+  "nodes": [
+    {
+      "id": "src",
+      "op": "source",
+      "variants": [
+        {"flag": {"type": "bool"}},
+        {"n": {"type": "int"}}
+      ]
+    },
+    {
+      "id": "out",
+      "op": "project",
+      "input": "src",
+      "columns": {
+        "sum": {"op": "add", "args": [{"field": "flag"}, {"const": 1}]}
+      }
+    }
+  ],
+  "output": "out"
+}

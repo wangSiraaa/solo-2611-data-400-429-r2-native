@@ -1,0 +1,7 @@
+{
+  "src": [
+    {"kind": "sale", "gross": 100},
+    {"kind": "adjustment", "net": 30},
+    {"kind": "sale", "gross": 25}
+  ]
+}

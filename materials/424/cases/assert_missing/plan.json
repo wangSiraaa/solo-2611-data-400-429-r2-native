@@ -1,0 +1,43 @@
+{
+  "nodes": [
+    {
+      "id": "src",
+      "op": "source",
+      "variants": [
+        {
+          "kind": {"type": "literal", "value": "sale"},
+          "gross": {"type": "int"},
+          "tax": {"type": "int"}
+        },
+        {
+          "kind": {"type": "literal", "value": "adjustment"},
+          "net": {"type": "int"}
+        }
+      ]
+    },
+    {
+      "id": "unified",
+      "op": "project",
+      "input": "src",
+      "columns": {
+        "amount": {
+          "op": "if",
+          "args": [
+            {"op": "eq", "args": [{"field": "kind"}, {"const": "sale"}]},
+            {"op": "add", "args": [{"field": "gross"}, {"field": "tax"}]},
+            {"field": "net"}
+          ]
+        }
+      }
+    },
+    {
+      "id": "checked",
+      "op": "assert_contract",
+      "input": "unified",
+      "variants": [
+        {"amount": {"type": "text"}}
+      ]
+    }
+  ],
+  "output": "checked"
+}

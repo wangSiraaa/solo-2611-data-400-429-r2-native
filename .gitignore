@@ -3,3 +3,6 @@ __pycache__/
 *-wal
 *-shm
 *-journal
+verify_out/
+verify_out_cli/
+demo_out/

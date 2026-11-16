@@ -1,0 +1,61 @@
+{
+  "nodes": [
+    {
+      "id": "sales",
+      "op": "source",
+      "variants": [
+        {
+          "kind": {"type": "literal", "value": "sale"},
+          "gross": {"type": "int"},
+          "tax": {"type": "int"}
+        }
+      ]
+    },
+    {
+      "id": "adjustments",
+      "op": "source",
+      "variants": [
+        {
+          "kind": {"type": "literal", "value": "adjustment"},
+          "net": {"type": "int"}
+        }
+      ]
+    },
+    {
+      "id": "all_rows",
+      "op": "concat",
+      "inputs": ["sales", "adjustments"]
+    },
+    {
+      "id": "unified",
+      "op": "project",
+      "input": "all_rows",
+      "columns": {
+        "kind": {"field": "kind"},
+        "amount": {
+          "op": "if",
+          "args": [
+            {"op": "eq", "args": [{"field": "kind"}, {"const": "sale"}]},
+            {"op": "add", "args": [{"field": "gross"}, {"field": "tax"}]},
+            {"field": "net"}
+          ]
+        },
+        "amount_plus_one": {
+          "op": "add",
+          "args": [
+            {
+              "op": "if",
+              "args": [
+                {"op": "eq", "args": [{"field": "kind"}, {"const": "sale"}]},
+                {"op": "add", "args": [{"field": "gross"}, {"field": "tax"}]},
+                {"field": "net"}
+              ]
+            },
+            {"const": 1}
+          ]
+        }
+      }
+    }
+  ],
+  "output": "unified"
+}

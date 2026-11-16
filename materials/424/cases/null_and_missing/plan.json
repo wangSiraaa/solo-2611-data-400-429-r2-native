@@ -1,0 +1,51 @@
+{
+  "nodes": [
+    {
+      "id": "src",
+      "op": "source",
+      "variants": [
+        {
+          "kind": {"type": "literal", "value": "withnull"},
+          "note": {"type": "null"}
+        },
+        {
+          "kind": {"type": "literal", "value": "missing"},
+          "other": {"type": "text"}
+        }
+      ]
+    },
+    {
+      "id": "out",
+      "op": "project",
+      "input": "src",
+      "columns": {
+        "kind": {"field": "kind"},
+        "note_present": {
+          "op": "if",
+          "args": [
+            {"op": "has", "args": [{"field": "note"}]},
+            {"const": true},
+            {"const": false}
+          ]
+        },
+        "note_or_default": {
+          "op": "get",
+          "args": [{"field": "note"}, {"const": "DEFAULT"}]
+        },
+        "other_or_default": {
+          "op": "get",
+          "args": [{"field": "other"}, {"const": "DEFAULT"}]
+        },
+        "guarded_note": {
+          "op": "if",
+          "args": [
+            {"op": "has", "args": [{"field": "note"}]},
+            {"field": "note"},
+            {"const": "was-missing"}
+          ]
+        }
+      }
+    }
+  ],
+  "output": "out"
+}

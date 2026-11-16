@@ -1,0 +1,71 @@
+{
+  "nodes": [
+    {
+      "id": "src",
+      "op": "source",
+      "variants": [
+        {
+          "kind": {"type": "literal", "value": "b"},
+          "flag": {"type": "bool"}
+        },
+        {
+          "kind": {"type": "literal", "value": "i"},
+          "n": {"type": "int"}
+        },
+        {
+          "kind": {"type": "literal", "value": "litb"},
+          "flag": {"type": "literal", "value": true}
+        },
+        {
+          "kind": {"type": "literal", "value": "liti"},
+          "n": {"type": "literal", "value": 1}
+        }
+      ]
+    },
+    {
+      "id": "out",
+      "op": "project",
+      "input": "src",
+      "columns": {
+        "kind": {"field": "kind"},
+        "kind_is_litb": {
+          "op": "if",
+          "args": [
+            {"op": "eq", "args": [{"field": "kind"}, {"const": "litb"}]},
+            {"const": true},
+            {"const": false}
+          ]
+        },
+        "flag_status": {
+          "op": "if",
+          "args": [
+            {"op": "has", "args": [{"field": "flag"}]},
+            {"op": "if", "args": [
+              {"op": "type_is", "args": [{"field": "flag"}, {"const": "bool"}]},
+              {"const": "bool-present"},
+              {"const": "nonbool-present"}
+            ]},
+            {"const": "absent"}
+          ]
+        },
+        "n_plus_41": {
+          "op": "if",
+          "args": [
+            {"op": "type_is", "args": [{"field": "n"}, {"const": "int"}]},
+            {"op": "add", "args": [{"field": "n"}, {"const": 41}]},
+            {"const": null}
+          ]
+        },
+        "flag_shape": {
+          "op": "if",
+          "args": [
+            {"op": "type_is", "args": [{"field": "flag"}, {"const": "bool"}]},
+            {"const": "flag-is-bool"},
+            {"const": "flag-absent"}
+          ]
+        }
+      }
+    }
+  ],
+  "output": "out"
+}

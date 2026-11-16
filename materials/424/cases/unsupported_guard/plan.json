@@ -1,0 +1,34 @@
+{
+  "nodes": [
+    {
+      "id": "src",
+      "op": "source",
+      "variants": [
+        {
+          "kind": {"type": "literal", "value": "b"},
+          "flag": {"type": "bool"}
+        },
+        {
+          "kind": {"type": "literal", "value": "i"},
+          "n": {"type": "int"}
+        }
+      ]
+    },
+    {
+      "id": "out",
+      "op": "project",
+      "input": "src",
+      "columns": {
+        "bad": {
+          "op": "if",
+          "args": [
+            {"op": "eq", "args": [{"field": "n"}, {"const": 7}]},
+            {"const": "seven"},
+            {"const": "other"}
+          ]
+        }
+      }
+    }
+  ],
+  "output": "out"
+}

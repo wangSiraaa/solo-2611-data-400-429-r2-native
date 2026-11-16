@@ -1,0 +1,6 @@
+{
+  "src": [
+    {"kind": "withnull", "note": null},
+    {"kind": "missing", "other": "x"}
+  ]
+}

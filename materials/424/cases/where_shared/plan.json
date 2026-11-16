@@ -1,0 +1,62 @@
+{
+  "nodes": [
+    {
+      "id": "src",
+      "op": "source",
+      "variants": [
+        {
+          "kind": {"type": "literal", "value": "sale"},
+          "gross": {"type": "int"}
+        },
+        {
+          "kind": {"type": "literal", "value": "adjustment"},
+          "net": {"type": "int"}
+        }
+      ]
+    },
+    {
+      "id": "only_sales",
+      "op": "where",
+      "input": "src",
+      "guard": {"op": "eq", "args": [{"field": "kind"}, {"const": "sale"}]}
+    },
+    {
+      "id": "only_adjustments",
+      "op": "where",
+      "input": "src",
+      "guard": {"op": "eq", "args": [{"field": "kind"}, {"const": "adjustment"}]}
+    },
+    {
+      "id": "sale_amounts",
+      "op": "project",
+      "input": "only_sales",
+      "columns": {"amount": {"field": "gross"}}
+    },
+    {
+      "id": "sales_audit",
+      "op": "project",
+      "input": "only_sales",
+      "columns": {"audited_kind": {"field": "kind"}}
+    },
+    {
+      "id": "adjustment_amounts",
+      "op": "project",
+      "input": "only_adjustments",
+      "columns": {"amount": {"field": "net"}}
+    },
+    {
+      "id": "merged",
+      "op": "concat",
+      "inputs": ["sale_amounts", "adjustment_amounts"]
+    },
+    {
+      "id": "checked",
+      "op": "assert_contract",
+      "input": "merged",
+      "variants": [
+        {"amount": {"type": "int"}}
+      ]
+    }
+  ],
+  "output": "checked"
+}
