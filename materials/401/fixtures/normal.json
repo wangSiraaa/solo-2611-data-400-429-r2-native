@@ -1,0 +1,27 @@
+{
+  "estimated_left_rows": 1,
+  "left": [
+    {
+      "id": "l0",
+      "key": "hit",
+      "value": 7
+    }
+  ],
+  "right": [
+    {
+      "id": "r0",
+      "key": "hit",
+      "value": 10
+    },
+    {
+      "id": "r1",
+      "key": "other",
+      "value": 20
+    },
+    {
+      "id": "r2",
+      "key": null,
+      "value": 30
+    }
+  ]
+}

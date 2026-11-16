@@ -1,0 +1,427 @@
+{
+  "estimated_left_rows": 20,
+  "left": [
+    {
+      "id": "l0",
+      "key": "only-hit",
+      "value": 0
+    },
+    {
+      "id": "l1",
+      "key": "miss-1",
+      "value": 1
+    },
+    {
+      "id": "l2",
+      "key": "miss-2",
+      "value": 2
+    },
+    {
+      "id": "l3",
+      "key": "miss-3",
+      "value": 3
+    },
+    {
+      "id": "l4",
+      "key": "miss-4",
+      "value": 4
+    },
+    {
+      "id": "l5",
+      "key": "miss-5",
+      "value": 5
+    },
+    {
+      "id": "l6",
+      "key": "miss-6",
+      "value": 6
+    },
+    {
+      "id": "l7",
+      "key": "miss-7",
+      "value": 7
+    },
+    {
+      "id": "l8",
+      "key": "miss-8",
+      "value": 8
+    },
+    {
+      "id": "l9",
+      "key": "miss-9",
+      "value": 9
+    },
+    {
+      "id": "l10",
+      "key": "miss-10",
+      "value": 10
+    },
+    {
+      "id": "l11",
+      "key": "miss-11",
+      "value": 11
+    },
+    {
+      "id": "l12",
+      "key": "miss-12",
+      "value": 12
+    },
+    {
+      "id": "l13",
+      "key": "miss-13",
+      "value": 13
+    },
+    {
+      "id": "l14",
+      "key": "miss-14",
+      "value": 14
+    },
+    {
+      "id": "l15",
+      "key": "miss-15",
+      "value": 15
+    },
+    {
+      "id": "l16",
+      "key": "miss-16",
+      "value": 16
+    },
+    {
+      "id": "l17",
+      "key": "miss-17",
+      "value": 17
+    },
+    {
+      "id": "l18",
+      "key": "miss-18",
+      "value": 18
+    },
+    {
+      "id": "l19",
+      "key": "miss-19",
+      "value": 19
+    }
+  ],
+  "right": [
+    {
+      "id": "r0",
+      "key": "only-hit",
+      "value": 0
+    },
+    {
+      "id": "r1",
+      "key": "other-1",
+      "value": 1
+    },
+    {
+      "id": "r2",
+      "key": "other-2",
+      "value": 2
+    },
+    {
+      "id": "r3",
+      "key": "other-3",
+      "value": 3
+    },
+    {
+      "id": "r4",
+      "key": "other-4",
+      "value": 4
+    },
+    {
+      "id": "r5",
+      "key": "other-5",
+      "value": 5
+    },
+    {
+      "id": "r6",
+      "key": "other-6",
+      "value": 6
+    },
+    {
+      "id": "r7",
+      "key": "other-7",
+      "value": 7
+    },
+    {
+      "id": "r8",
+      "key": "other-8",
+      "value": 8
+    },
+    {
+      "id": "r9",
+      "key": "other-9",
+      "value": 9
+    },
+    {
+      "id": "r10",
+      "key": "other-10",
+      "value": 10
+    },
+    {
+      "id": "r11",
+      "key": "other-11",
+      "value": 11
+    },
+    {
+      "id": "r12",
+      "key": "other-12",
+      "value": 12
+    },
+    {
+      "id": "r13",
+      "key": "other-13",
+      "value": 13
+    },
+    {
+      "id": "r14",
+      "key": "other-14",
+      "value": 14
+    },
+    {
+      "id": "r15",
+      "key": "other-15",
+      "value": 15
+    },
+    {
+      "id": "r16",
+      "key": "other-16",
+      "value": 16
+    },
+    {
+      "id": "r17",
+      "key": "other-17",
+      "value": 17
+    },
+    {
+      "id": "r18",
+      "key": "other-18",
+      "value": 18
+    },
+    {
+      "id": "r19",
+      "key": "other-19",
+      "value": 19
+    },
+    {
+      "id": "r20",
+      "key": "other-20",
+      "value": 20
+    },
+    {
+      "id": "r21",
+      "key": "other-21",
+      "value": 21
+    },
+    {
+      "id": "r22",
+      "key": "other-22",
+      "value": 22
+    },
+    {
+      "id": "r23",
+      "key": "other-23",
+      "value": 23
+    },
+    {
+      "id": "r24",
+      "key": "other-24",
+      "value": 24
+    },
+    {
+      "id": "r25",
+      "key": "other-25",
+      "value": 25
+    },
+    {
+      "id": "r26",
+      "key": "other-26",
+      "value": 26
+    },
+    {
+      "id": "r27",
+      "key": "other-27",
+      "value": 27
+    },
+    {
+      "id": "r28",
+      "key": "other-28",
+      "value": 28
+    },
+    {
+      "id": "r29",
+      "key": "other-29",
+      "value": 29
+    },
+    {
+      "id": "r30",
+      "key": "other-30",
+      "value": 30
+    },
+    {
+      "id": "r31",
+      "key": "other-31",
+      "value": 31
+    },
+    {
+      "id": "r32",
+      "key": "other-32",
+      "value": 32
+    },
+    {
+      "id": "r33",
+      "key": "other-33",
+      "value": 33
+    },
+    {
+      "id": "r34",
+      "key": "other-34",
+      "value": 34
+    },
+    {
+      "id": "r35",
+      "key": "other-35",
+      "value": 35
+    },
+    {
+      "id": "r36",
+      "key": "other-36",
+      "value": 36
+    },
+    {
+      "id": "r37",
+      "key": "other-37",
+      "value": 37
+    },
+    {
+      "id": "r38",
+      "key": "other-38",
+      "value": 38
+    },
+    {
+      "id": "r39",
+      "key": "other-39",
+      "value": 39
+    },
+    {
+      "id": "r40",
+      "key": "other-40",
+      "value": 40
+    },
+    {
+      "id": "r41",
+      "key": "other-41",
+      "value": 41
+    },
+    {
+      "id": "r42",
+      "key": "other-42",
+      "value": 42
+    },
+    {
+      "id": "r43",
+      "key": "other-43",
+      "value": 43
+    },
+    {
+      "id": "r44",
+      "key": "other-44",
+      "value": 44
+    },
+    {
+      "id": "r45",
+      "key": "other-45",
+      "value": 45
+    },
+    {
+      "id": "r46",
+      "key": "other-46",
+      "value": 46
+    },
+    {
+      "id": "r47",
+      "key": "other-47",
+      "value": 47
+    },
+    {
+      "id": "r48",
+      "key": "other-48",
+      "value": 48
+    },
+    {
+      "id": "r49",
+      "key": "other-49",
+      "value": 49
+    },
+    {
+      "id": "r50",
+      "key": "other-50",
+      "value": 50
+    },
+    {
+      "id": "r51",
+      "key": "other-51",
+      "value": 51
+    },
+    {
+      "id": "r52",
+      "key": "other-52",
+      "value": 52
+    },
+    {
+      "id": "r53",
+      "key": "other-53",
+      "value": 53
+    },
+    {
+      "id": "r54",
+      "key": "other-54",
+      "value": 54
+    },
+    {
+      "id": "r55",
+      "key": "other-55",
+      "value": 55
+    },
+    {
+      "id": "r56",
+      "key": "other-56",
+      "value": 56
+    },
+    {
+      "id": "r57",
+      "key": "other-57",
+      "value": 57
+    },
+    {
+      "id": "r58",
+      "key": "other-58",
+      "value": 58
+    },
+    {
+      "id": "r59",
+      "key": "other-59",
+      "value": 59
+    },
+    {
+      "id": "r60",
+      "key": "other-60",
+      "value": 60
+    },
+    {
+      "id": "r61",
+      "key": "other-61",
+      "value": 61
+    },
+    {
+      "id": "r62",
+      "key": "other-62",
+      "value": 62
+    },
+    {
+      "id": "r63",
+      "key": "other-63",
+      "value": 63
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "estimated_left_rows": 8,
+  "left": [
+    {
+      "id": "l0",
+      "key": null,
+      "value": 0
+    },
+    {
+      "id": "l1",
+      "key": "hot",
+      "value": 1
+    },
+    {
+      "id": "l2",
+      "key": "hot",
+      "value": 2
+    }
+  ],
+  "right": [
+    {
+      "id": "r0",
+      "key": null,
+      "value": 4
+    },
+    {
+      "id": "r1",
+      "key": "hot",
+      "value": 5
+    },
+    {
+      "id": "r2",
+      "key": "hot",
+      "value": 5
+    }
+  ]
+}
