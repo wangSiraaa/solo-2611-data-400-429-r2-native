@@ -10,6 +10,10 @@ class Pages:
         self.root.mkdir(parents=True, exist_ok=True)
         self.audit = []
 
+    def list_pages(self):
+        return sorted(path.stem for path in self.root.glob('*.json')
+                      if path.suffix == '.json')
+
     def read(self, page_id):
         return json.loads((self.root / (page_id + '.json')).read_text())
 

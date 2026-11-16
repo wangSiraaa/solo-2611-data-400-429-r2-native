@@ -1,4 +1,11 @@
-"""Pending append is volatile; force really writes/fsyncs the durable log prefix."""
+"""Pending append is volatile; force really writes/fsyncs the durable log prefix.
+
+The journal is the single durability authority.  ``append`` only touches process
+memory; nothing is crash-safe until ``force`` rewrites the real file, flushes it
+and fsyncs it.  ``durable`` always reopens and re-reads wal.jsonl, so it reports
+the prefix a freshly started recovery process would actually see rather than a
+cached claim.
+"""
 import json
 import os
 from pathlib import Path
@@ -26,6 +33,10 @@ class Journal:
         records = self.records()
         entry = {'lsn': (records[-1]['lsn'] if records else 0) + 1, **record}
         self.pending.append(entry)
+        # Volatile by definition: this audit line must never be read as durability.
+        self.audit.append({'operation': 'append', 'lsn': entry['lsn'],
+                           'kind': entry['kind'], 'durable': False,
+                           'pending_records': len(self.pending)})
         return entry['lsn']
 
     def force(self, through_lsn):
@@ -38,7 +49,11 @@ class Journal:
                 output.flush()
                 os.fsync(output.fileno())
             self.pending.clear()
+        durable_lsn = self.durable_lsn()
+        if through_lsn > durable_lsn:
+            raise RuntimeError('force completed but durable prefix ends at %s, wanted %s'
+                               % (durable_lsn, through_lsn))
         self.audit.append({'operation': 'force', 'requested_lsn': through_lsn,
-                           'actual_durable_lsn': self.durable_lsn(),
+                           'actual_durable_lsn': durable_lsn,
                            'actual_file_bytes': self.path.stat().st_size})
-        return self.durable_lsn()
+        return durable_lsn
