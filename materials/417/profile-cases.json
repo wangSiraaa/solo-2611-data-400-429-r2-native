@@ -1,0 +1,13 @@
+{
+  "document_recipe": {
+    "A":{"alpha":3},
+    "B":{"alpha":4,"pad":196},
+    "C000..C097":{"beta":200}
+  },
+  "block_size":1,
+  "terms":["alpha"],
+  "k":1,
+  "profiles":[{"k1":1.2,"b":0.75,"expected_winner":"A"},{"k1":2.0,"b":0.0,"expected_winner":"B"}],
+  "max_query_raw_document_access_exclusive":50,
+  "max_scored_exclusive":50
+}
