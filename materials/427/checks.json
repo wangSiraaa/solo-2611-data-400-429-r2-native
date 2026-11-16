@@ -2,6 +2,7 @@
   {
     "check_id": "a-email",
     "kind": "not_null",
+    "source": "events",
     "field": "email",
     "population": {
       "op": "eq",
@@ -12,6 +13,7 @@
   {
     "check_id": "b-email-unique",
     "kind": "unique",
+    "source": "events",
     "fields": [
       "email"
     ],
