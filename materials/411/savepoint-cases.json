@@ -3,5 +3,105 @@
   "conflicting_schedule": ["T1 begin", "T2 begin", "T1 savepoint s", "T1 scan team 1 -> a=true,b=true", "T1 put b=false", "T1 rollback_to s", "T2 scan team 1 -> a=true,b=true", "T2 put a=false", "T2 commit", "T1 put b=false using earlier observation", "T1 commit"],
   "required": "Both cannot commit: rollback restores writes but does not erase returned observations.",
   "nonconflicting_schedule": ["T1 begin", "T1 savepoint s", "T1 put a=false", "T1 scan sees own a=false", "T1 rollback_to s", "T1 commit"],
-  "nonconflicting_required": "Commit may succeed with original a=true; the earlier private value is not an external concurrent modification."
+  "nonconflicting_required": "Commit may succeed with original a=true; the earlier private value is not an external concurrent modification.",
+  "runs": [
+    {
+      "name": "read_survives_rollback_write_skew",
+      "comment": "读取后回滚仍参与决策：撤回的写不抹掉已返回观察，两人不能都成功。",
+      "ops": [
+        ["begin", "T1"],
+        ["begin", "T2"],
+        ["savepoint", "T1", "s", "ACTIVE"],
+        ["scan", "T1", 1, 1],
+        ["put", "T1", {"row_id": "b", "team": 1, "on_call": false}],
+        ["rollback_to", "T1", "s", "ACTIVE"],
+        ["scan", "T2", 1, 1],
+        ["put", "T2", {"row_id": "a", "team": 1, "on_call": false}],
+        ["commit", "T2", "COMMITTED"],
+        ["put", "T1", {"row_id": "b", "team": 1, "on_call": false}],
+        ["commit", "T1", "CONFLICT"]
+      ]
+    },
+    {
+      "name": "rolled_back_private_value_is_not_external_conflict",
+      "comment": "仅撤回私有写的正常路径：提交可成功，外部库保持原值。",
+      "seed": [{"row_id": "a", "team": 1, "on_call": true}],
+      "ops": [
+        ["begin", "T1"],
+        ["savepoint", "T1", "s", "ACTIVE"],
+        ["put", "T1", {"row_id": "a", "team": 1, "on_call": false}],
+        ["scan", "T1", 1, 1],
+        ["rollback_to", "T1", "s", "ACTIVE"],
+        ["scan", "T1", 1, 1],
+        ["commit", "T1", "COMMITTED"]
+      ]
+    },
+    {
+      "name": "delete_then_rollback_private_tombstone",
+      "comment": "删除后回滚：私有墓碑参与的是自己的读取重放，不制造外部冲突。",
+      "seed": [{"row_id": "a", "team": 1, "on_call": true}],
+      "ops": [
+        ["begin", "T1"],
+        ["savepoint", "T1", "s", "ACTIVE"],
+        ["delete", "T1", "a"],
+        ["get", "T1", "a"],
+        ["rollback_to", "T1", "s", "ACTIVE"],
+        ["get", "T1", "a"],
+        ["commit", "T1", "COMMITTED"]
+      ]
+    },
+    {
+      "name": "savepoint_name_rules",
+      "comment": "未知名称、重复活跃名称、超过4个嵌套均 INVALID_SAVEPOINT，且不改变事务状态。",
+      "seed": [],
+      "ops": [
+        ["begin", "T1"],
+        ["savepoint", "T1", "x", "ACTIVE"],
+        ["savepoint", "T1", "x", "INVALID_SAVEPOINT"],
+        ["rollback_to", "T1", "nope", "INVALID_SAVEPOINT"],
+        ["release", "T1", "nope", "INVALID_SAVEPOINT"],
+        ["savepoint", "T1", "s1", "ACTIVE"],
+        ["savepoint", "T1", "s2", "ACTIVE"],
+        ["savepoint", "T1", "s3", "ACTIVE"],
+        ["savepoint", "T1", "s4", "INVALID_SAVEPOINT"],
+        ["rollback_to", "T1", "s1", "ACTIVE"],
+        ["rollback_to", "T1", "s1", "ACTIVE"],
+        ["release", "T1", "x", "ACTIVE"],
+        ["savepoint", "T1", "x", "ACTIVE"],
+        ["abort", "T1", "ABORTED"],
+        ["savepoint", "T1", "y", "INVALID_SAVEPOINT"]
+      ]
+    },
+    {
+      "name": "nested_savepoints_release_keeps_writes",
+      "comment": "release 移除该点及内层保存点但保留全部私有写。",
+      "seed": [{"row_id": "a", "team": 1, "on_call": true}],
+      "ops": [
+        ["begin", "T1"],
+        ["savepoint", "T1", "outer", "ACTIVE"],
+        ["put", "T1", {"row_id": "a", "team": 1, "on_call": false}],
+        ["savepoint", "T1", "inner", "ACTIVE"],
+        ["put", "T1", {"row_id": "b", "team": 1, "on_call": true}],
+        ["release", "T1", "outer", "ACTIVE"],
+        ["rollback_to", "T1", "inner", "INVALID_SAVEPOINT"],
+        ["scan", "T1", 1, 1],
+        ["commit", "T1", "COMMITTED"]
+      ]
+    },
+    {
+      "name": "reused_name_after_release_and_read_after_rollback",
+      "comment": "多个保存点重名复用 + 回滚后仍依据早先读取做决策的只读分支。",
+      "seed": [{"row_id": "a", "team": 1, "on_call": true}],
+      "ops": [
+        ["begin", "T1"],
+        ["savepoint", "T1", "s", "ACTIVE"],
+        ["scan", "T1", 1, 1, true],
+        ["put", "T1", {"row_id": "a", "team": 1, "on_call": false}],
+        ["release", "T1", "s", "ACTIVE"],
+        ["savepoint", "T1", "s", "ACTIVE"],
+        ["rollback_to", "T1", "s", "ACTIVE"],
+        ["commit", "T1", "COMMITTED"]
+      ]
+    }
+  ]
 }

@@ -1,15 +1,7 @@
 {
   "seed": [
-    {
-      "row_id": "A",
-      "team": 1,
-      "on_call": true
-    },
-    {
-      "row_id": "B",
-      "team": 1,
-      "on_call": true
-    }
+    {"row_id": "A", "team": 1, "on_call": true},
+    {"row_id": "B", "team": 1, "on_call": true}
   ],
   "cases": {
     "write_skew": [
@@ -44,5 +36,246 @@
       "scan A team=1 includes C",
       "commit A"
     ]
-  }
+  },
+  "runs": [
+    {
+      "name": "write_skew_both_leave",
+      "comment": "双方离岗：两人都看到对方在岗后分别离岗，第二人必须 CONFLICT。",
+      "ops": [
+        ["begin", "A"],
+        ["begin", "B"],
+        ["scan", "A", 1, 1, true],
+        ["scan", "B", 1, 1, true],
+        ["put", "A", {"row_id": "A", "team": 1, "on_call": false}],
+        ["put", "B", {"row_id": "B", "team": 1, "on_call": false}],
+        ["commit", "A", "COMMITTED"],
+        ["commit", "B", "CONFLICT"],
+        ["commit", "B", "CONFLICT"]
+      ]
+    },
+    {
+      "name": "phantom_empty_range",
+      "comment": "空范围出现新行：扫描过的空团队区间被他人插入。",
+      "seed": [{"row_id": "A", "team": 1, "on_call": true}],
+      "ops": [
+        ["begin", "A"],
+        ["scan", "A", 2, 3],
+        ["begin", "B"],
+        ["put", "B", {"row_id": "C", "team": 2, "on_call": true}],
+        ["commit", "B", "COMMITTED"],
+        ["commit", "A", "CONFLICT"]
+      ]
+    },
+    {
+      "name": "outside_team_parallel_ok",
+      "comment": "另一 team 范围外的修改不能让本事务失败，两事务并行成功。",
+      "ops": [
+        ["begin", "A"],
+        ["begin", "B"],
+        ["scan", "A", 1, 1],
+        ["put", "B", {"row_id": "C", "team": 5, "on_call": true}],
+        ["commit", "B", "COMMITTED"],
+        ["commit", "A", "COMMITTED"]
+      ]
+    },
+    {
+      "name": "own_write_visible_and_serializable",
+      "comment": "同事务读自身写入；私有新行不是外部并发冲突。",
+      "seed": [],
+      "ops": [
+        ["begin", "A"],
+        ["put", "A", {"row_id": "C", "team": 1, "on_call": true}],
+        ["scan", "A", 1, 1],
+        ["get", "A", "C"],
+        ["commit", "A", "COMMITTED"]
+      ]
+    },
+    {
+      "name": "predicate_move_in",
+      "comment": "行被他人改 team 移入已扫描谓词范围。",
+      "seed": [{"row_id": "X", "team": 9, "on_call": true}],
+      "ops": [
+        ["begin", "A"],
+        ["scan", "A", 1, 2],
+        ["begin", "B"],
+        ["put", "B", {"row_id": "X", "team": 2, "on_call": true}],
+        ["commit", "B", "COMMITTED"],
+        ["commit", "A", "CONFLICT"]
+      ]
+    },
+    {
+      "name": "predicate_move_out",
+      "comment": "已返回行被他人改 team 移出谓词范围。",
+      "seed": [{"row_id": "X", "team": 1, "on_call": true}],
+      "ops": [
+        ["begin", "A"],
+        ["scan", "A", 1, 1],
+        ["begin", "B"],
+        ["put", "B", {"row_id": "X", "team": 9, "on_call": true}],
+        ["commit", "B", "COMMITTED"],
+        ["commit", "A", "CONFLICT"]
+      ]
+    },
+    {
+      "name": "on_call_flip_excluded_then_matched",
+      "comment": "on_call 翻转使行从被条件排除变为应返回。",
+      "seed": [{"row_id": "X", "team": 1, "on_call": false}],
+      "ops": [
+        ["begin", "A"],
+        ["scan", "A", 1, 1, true],
+        ["begin", "B"],
+        ["put", "B", {"row_id": "X", "team": 1, "on_call": true}],
+        ["commit", "B", "COMMITTED"],
+        ["commit", "A", "CONFLICT"]
+      ]
+    },
+    {
+      "name": "point_get_value_change",
+      "comment": "点读已返回的 on_call 被他人改变。",
+      "ops": [
+        ["begin", "A"],
+        ["get", "A", "A"],
+        ["begin", "B"],
+        ["put", "B", {"row_id": "A", "team": 1, "on_call": false}],
+        ["commit", "B", "COMMITTED"],
+        ["commit", "A", "CONFLICT"]
+      ]
+    },
+    {
+      "name": "point_get_missing_phantom",
+      "comment": "点读缺失键后被他人插入。",
+      "seed": [],
+      "ops": [
+        ["begin", "A"],
+        ["get", "A", "Z"],
+        ["begin", "B"],
+        ["put", "B", {"row_id": "Z", "team": 0, "on_call": false}],
+        ["commit", "B", "COMMITTED"],
+        ["commit", "A", "CONFLICT"]
+      ]
+    },
+    {
+      "name": "write_write_same_key",
+      "comment": "纯写写冲突：即使没有谓词交叠也按 first-committer-wins 拒绝。",
+      "ops": [
+        ["begin", "A"],
+        ["begin", "B"],
+        ["put", "A", {"row_id": "A", "team": 1, "on_call": false}],
+        ["put", "B", {"row_id": "A", "team": 2, "on_call": true}],
+        ["commit", "A", "COMMITTED"],
+        ["commit", "B", "CONFLICT"]
+      ]
+    },
+    {
+      "name": "two_scans_both_commit_interleaved",
+      "comment": "至少支持两事务都完成扫描后再依次提交且无交叠，均成功。",
+      "seed": [
+        {"row_id": "A", "team": 1, "on_call": true},
+        {"row_id": "C", "team": 3, "on_call": false}
+      ],
+      "ops": [
+        ["begin", "A"],
+        ["begin", "B"],
+        ["scan", "A", 1, 1],
+        ["scan", "B", 3, 3],
+        ["put", "A", {"row_id": "A", "team": 1, "on_call": false}],
+        ["put", "B", {"row_id": "C", "team": 3, "on_call": true}],
+        ["commit", "A", "COMMITTED"],
+        ["commit", "B", "COMMITTED"]
+      ]
+    },
+    {
+      "name": "read_only_explicit_endings",
+      "comment": "只读事务也要明确结束：commit 不产生 revision，abort 不发布。",
+      "ops": [
+        ["begin", "R1"],
+        ["scan", "R1", 1, 1],
+        ["commit", "R1", "COMMITTED"],
+        ["begin", "R2"],
+        ["get", "R2", "A"],
+        ["abort", "R2", "ABORTED"],
+        ["abort", "R2", "ABORTED"]
+      ]
+    },
+    {
+      "name": "private_delete_and_key_migration",
+      "comment": "事务内私有删除与键值迁移不被当成外部并发冲突。",
+      "ops": [
+        ["begin", "A"],
+        ["scan", "A", 1, 2],
+        ["delete", "A", "A"],
+        ["put", "A", {"row_id": "A", "team": 2, "on_call": false}],
+        ["scan", "A", 1, 2],
+        ["commit", "A", "COMMITTED"]
+      ]
+    },
+    {
+      "name": "private_delete_then_external_reinsert",
+      "comment": "先私有删除区间内键并扫描，他人随后外部重新插入同键：必须冲突。",
+      "seed": [{"row_id": "X", "team": 1, "on_call": true}],
+      "ops": [
+        ["begin", "A"],
+        ["delete", "A", "X"],
+        ["scan", "A", 1, 1],
+        ["begin", "B"],
+        ["put", "B", {"row_id": "X", "team": 1, "on_call": true}],
+        ["commit", "B", "COMMITTED"],
+        ["commit", "A", "CONFLICT"]
+      ]
+    },
+    {
+      "name": "private_move_out_then_external_change",
+      "comment": "先把键私有移出区间并扫描，他人改其 on_call：旧区间观察必须重验。",
+      "seed": [{"row_id": "X", "team": 1, "on_call": true}],
+      "ops": [
+        ["begin", "A"],
+        ["put", "A", {"row_id": "X", "team": 9, "on_call": true}],
+        ["scan", "A", 1, 1],
+        ["begin", "B"],
+        ["put", "B", {"row_id": "X", "team": 1, "on_call": false}],
+        ["commit", "B", "COMMITTED"],
+        ["commit", "A", "CONFLICT"]
+      ]
+    },
+    {
+      "name": "write_after_read_not_seen_by_earlier_read",
+      "comment": "读取之后的私有写不改变更早观察；串行枚举必须按读取水位重放。",
+      "seed": [{"row_id": "A", "team": 1, "on_call": true}],
+      "ops": [
+        ["begin", "A"],
+        ["scan", "A", 1, 1, true],
+        ["put", "A", {"row_id": "A", "team": 1, "on_call": false}],
+        ["scan", "A", 1, 1, true],
+        ["commit", "A", "COMMITTED"]
+      ]
+    },
+    {
+      "name": "private_delete_alone_is_serializable",
+      "comment": "仅私有删除并扫描空结果，无外部交叠时成功。",
+      "seed": [{"row_id": "X", "team": 1, "on_call": true}],
+      "ops": [
+        ["begin", "A"],
+        ["delete", "A", "X"],
+        ["scan", "A", 1, 1],
+        ["get", "A", "X"],
+        ["commit", "A", "COMMITTED"]
+      ]
+    },
+    {
+      "name": "global_revision_does_not_block_unrelated_tx",
+      "comment": "不能仅因全局版本变化拒绝事务：多个无关 revision 后无交叠事务仍成功。",
+      "seed": [{"row_id": "A", "team": 1, "on_call": true}],
+      "ops": [
+        ["begin", "A"],
+        ["scan", "A", 1, 1],
+        ["begin", "B"],
+        ["put", "B", {"row_id": "B", "team": 5, "on_call": true}],
+        ["commit", "B", "COMMITTED"],
+        ["begin", "C"],
+        ["put", "C", {"row_id": "C", "team": 6, "on_call": true}],
+        ["commit", "C", "COMMITTED"],
+        ["commit", "A", "COMMITTED"]
+      ]
+    }
+  ]
 }
