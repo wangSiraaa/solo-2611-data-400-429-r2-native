@@ -1,0 +1,7 @@
+{
+  "source_rows": 820,
+  "join_rows": 8000,
+  "sum": 76000,
+  "full_combinations_live_limit": 100,
+  "source_ref_limit": 2000
+}
