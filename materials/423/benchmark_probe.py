@@ -1,46 +1,64 @@
-"""Fixed selectivity feasibility only, not the general multikey implementation."""
+"""Selectivity benchmark over the real persistent multikey catalog.
+
+500 same-tenant documents, only 10 carrying the target sku.  The tenant/sku
+equality query must reach no more than 30 documents on the table fetch; the
+full index access log is retained and returned.  This proves selective
+access for the targeted shape - it does not promise every query beats a
+full scan.
+"""
+
 import json
-import sqlite3
+import shutil
 import tempfile
 from pathlib import Path
 
+from catalog import Catalog
+from evaluator import query_documents
+from tests.gen import benchmark_documents
+
+FETCH_LIMIT = 30
+
 
 def run():
-    with tempfile.TemporaryDirectory() as directory:
-        connection = sqlite3.connect(str(Path(directory) / 'index.sqlite'))
-        connection.executescript('''
-            PRAGMA cache_size=-1024;
-            CREATE TABLE documents(id TEXT PRIMARY KEY, payload TEXT);
-            CREATE TABLE keys(tenant TEXT, sku TEXT, id TEXT);
-            CREATE INDEX lookup ON keys(tenant,sku,id);
-        ''')
-        for number in range(500):
-            document = {'_id': 'd%03d' % number, 'tenant': 't', 'enabled': True,
-                        'items': [{'sku': 'wanted' if number < 10 else 'other', 'qty': number}]}
-            connection.execute('INSERT INTO documents VALUES (?,?)',
-                               (document['_id'], json.dumps(document)))
-            connection.execute('INSERT INTO keys VALUES (?,?,?)',
-                               ('t', document['items'][0]['sku'], document['_id']))
-        candidates = [row[0] for row in connection.execute(
-            'SELECT DISTINCT id FROM keys WHERE tenant=? AND sku=?', ('t', 'wanted'))]
-        documents_fetched = 0
-        actual = []
-        for identity in candidates:
-            document = json.loads(connection.execute(
-                'SELECT payload FROM documents WHERE id=?', (identity,)).fetchone()[0])
-            documents_fetched += 1
-            if document['tenant'] == 't' and any(item['sku'] == 'wanted' for item in document['items']):
-                actual.append(document['_id'])
-        expected = ['d%03d' % number for number in range(10)]
-        assert actual == expected
-        plan = [list(row) for row in connection.execute(
-            'EXPLAIN QUERY PLAN SELECT DISTINCT id FROM keys WHERE tenant=? AND sku=?', ('t', 'wanted'))]
-        connection.close()
-        return {'scope': 'Fixed tenant/sku selectivity case only; no general index planner or updates.',
-                'source_documents': 500, 'expected_matches': 10,
-                'actual_matches': actual, 'actual_documents_fetched': documents_fetched,
-                'required_fetch_limit': 30, 'query_plan': plan, 'sqlite_cache_kib': 1024}
+    documents = benchmark_documents()
+    workdir = Path(tempfile.mkdtemp(prefix='q423-benchmark-'))
+    try:
+        catalog = Catalog.build(
+            workdir / 'store',
+            {'main': ['tenant', 'items.sku', 'items.qty']},
+            documents,
+        )
+        query = {
+            'and': [
+                {'field': 'tenant', 'op': 'eq', 'value': 't'},
+                {'field': 'items.sku', 'op': 'eq', 'value': 'wanted'},
+            ]
+        }
+        explanation = catalog.explain(query)
+        log_row = catalog.index_access_log()[0]
+        assert explanation['matches'] == query_documents(query, documents)
+        assert explanation['fetches'] <= FETCH_LIMIT, explanation['fetches']
+        result = {
+            'scope': 'real compound multikey catalog; selective tenant/sku access',
+            'source_documents': len(documents),
+            'expected_matches': 10,
+            'actual_matches': explanation['matches'],
+            'strategy': explanation['strategy'],
+            'index_ranges': explanation['ranges'],
+            'keys_accessed': explanation['keys_accessed'],
+            'candidate_documents': explanation['candidates'],
+            'documents_fetched': explanation['fetches'],
+            'residual_checks': explanation['residual_checks'],
+            'required_fetch_limit': FETCH_LIMIT,
+            'within_fetch_limit': explanation['fetches'] <= FETCH_LIMIT,
+            'retained_access_log': log_row,
+            'verify': catalog.verify(),
+        }
+        catalog.close()
+        return result
+    finally:
+        shutil.rmtree(workdir, ignore_errors=True)
 
 
 if __name__ == '__main__':
-    print(json.dumps(run()))
+    print(json.dumps(run(), ensure_ascii=False, indent=2))
