@@ -1,0 +1,7 @@
+{
+  "initial": [{"row_id":"a","team":1,"on_call":true},{"row_id":"b","team":1,"on_call":true}],
+  "conflicting_schedule": ["T1 begin", "T2 begin", "T1 savepoint s", "T1 scan team 1 -> a=true,b=true", "T1 put b=false", "T1 rollback_to s", "T2 scan team 1 -> a=true,b=true", "T2 put a=false", "T2 commit", "T1 put b=false using earlier observation", "T1 commit"],
+  "required": "Both cannot commit: rollback restores writes but does not erase returned observations.",
+  "nonconflicting_schedule": ["T1 begin", "T1 savepoint s", "T1 put a=false", "T1 scan sees own a=false", "T1 rollback_to s", "T1 commit"],
+  "nonconflicting_required": "Commit may succeed with original a=true; the earlier private value is not an external concurrent modification."
+}

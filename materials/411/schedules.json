@@ -1,0 +1,48 @@
+{
+  "seed": [
+    {
+      "row_id": "A",
+      "team": 1,
+      "on_call": true
+    },
+    {
+      "row_id": "B",
+      "team": 1,
+      "on_call": true
+    }
+  ],
+  "cases": {
+    "write_skew": [
+      "begin A",
+      "begin B",
+      "scan A team=1,on_call=true",
+      "scan B team=1,on_call=true",
+      "put A:A,on_call=false",
+      "put B:B,on_call=false",
+      "commit A",
+      "commit B"
+    ],
+    "phantom": [
+      "begin A",
+      "scan A team=2..3 empty",
+      "begin B",
+      "put B:C,team=2",
+      "commit B",
+      "commit A"
+    ],
+    "outside_read": [
+      "begin A",
+      "scan A team=1",
+      "begin B",
+      "put B:C,team=5",
+      "commit B",
+      "commit A"
+    ],
+    "own_write": [
+      "begin A",
+      "put A:C,team=1",
+      "scan A team=1 includes C",
+      "commit A"
+    ]
+  }
+}
