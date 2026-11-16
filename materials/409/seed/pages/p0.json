@@ -1,0 +1,9 @@
+{
+  "page_id": "p0",
+  "page_lsn": 0,
+  "rows": {
+    "alpha": 10,
+    "beta": 20,
+    "untouched": 731
+  }
+}

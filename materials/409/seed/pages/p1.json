@@ -1,0 +1,7 @@
+{
+  "page_id": "p1",
+  "page_lsn": 0,
+  "rows": {
+    "reserve": 12345
+  }
+}

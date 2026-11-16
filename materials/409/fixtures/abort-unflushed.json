@@ -1,0 +1,46 @@
+[
+  {
+    "op": "begin",
+    "tx": "L"
+  },
+  {
+    "op": "add",
+    "tx": "L",
+    "page": "p0",
+    "key": "alpha",
+    "delta": 89
+  },
+  {
+    "op": "add",
+    "tx": "L",
+    "page": "p0",
+    "key": "alpha",
+    "delta": 2
+  },
+  {
+    "op": "begin",
+    "tx": "W"
+  },
+  {
+    "op": "add",
+    "tx": "W",
+    "page": "p0",
+    "key": "beta",
+    "delta": 2
+  },
+  {
+    "op": "commit",
+    "tx": "W"
+  },
+  {
+    "op": "flush",
+    "page": "p0"
+  },
+  {
+    "op": "abort",
+    "tx": "L"
+  },
+  {
+    "op": "crash"
+  }
+]

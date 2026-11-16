@@ -1,0 +1,20 @@
+[
+  {
+    "op": "begin",
+    "tx": "L"
+  },
+  {
+    "op": "add",
+    "tx": "L",
+    "page": "p0",
+    "key": "alpha",
+    "delta": 89
+  },
+  {
+    "op": "flush",
+    "page": "p0"
+  },
+  {
+    "op": "crash"
+  }
+]

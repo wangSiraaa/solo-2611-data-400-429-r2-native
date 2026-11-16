@@ -1,0 +1,20 @@
+[
+  {
+    "op": "begin",
+    "tx": "N"
+  },
+  {
+    "op": "add",
+    "tx": "N",
+    "page": "p0",
+    "key": "alpha",
+    "delta": 5
+  },
+  {
+    "op": "commit",
+    "tx": "N"
+  },
+  {
+    "op": "crash"
+  }
+]
