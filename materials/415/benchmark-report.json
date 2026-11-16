@@ -1,0 +1,432 @@
+{
+  "source_state": {
+    "version": 1,
+    "sizes": {
+      "parent": 100,
+      "child": 1000
+    }
+  },
+  "catalog_qualifications": {
+    "before_validation": [
+      {
+        "kind": "UNIQUE",
+        "table": "parent",
+        "column": "id",
+        "identity": [
+          "UNIQUE",
+          "parent",
+          "id"
+        ],
+        "status": "DECLARED",
+        "validated_state": null,
+        "validated_seq": null,
+        "coverage": null,
+        "witnesses": [],
+        "counts": null
+      },
+      {
+        "kind": "FOREIGN_KEY",
+        "table": "child",
+        "column": "parent_id",
+        "parent": "parent",
+        "parent_column": "id",
+        "identity": [
+          "FOREIGN_KEY",
+          "child",
+          "parent_id",
+          "parent",
+          "id"
+        ],
+        "status": "DECLARED",
+        "validated_state": null,
+        "validated_seq": null,
+        "coverage": null,
+        "witnesses": [],
+        "counts": null
+      },
+      {
+        "kind": "NOT_NULL",
+        "table": "child",
+        "column": "parent_id",
+        "identity": [
+          "NOT_NULL",
+          "child",
+          "parent_id"
+        ],
+        "status": "DECLARED",
+        "validated_state": null,
+        "validated_seq": null,
+        "coverage": null,
+        "witnesses": [],
+        "counts": null
+      }
+    ],
+    "after_validation": [
+      {
+        "kind": "UNIQUE",
+        "table": "parent",
+        "column": "id",
+        "identity": [
+          "UNIQUE",
+          "parent",
+          "id"
+        ],
+        "status": "TRUSTED",
+        "validated_state": 0,
+        "validated_seq": 1,
+        "coverage": {
+          "parent": 100
+        },
+        "witnesses": [],
+        "counts": {
+          "checked": 100,
+          "duplicate_values": 0
+        }
+      },
+      {
+        "kind": "FOREIGN_KEY",
+        "table": "child",
+        "column": "parent_id",
+        "parent": "parent",
+        "parent_column": "id",
+        "identity": [
+          "FOREIGN_KEY",
+          "child",
+          "parent_id",
+          "parent",
+          "id"
+        ],
+        "status": "TRUSTED",
+        "validated_state": 0,
+        "validated_seq": 2,
+        "coverage": {
+          "child": 1000,
+          "parent": 100
+        },
+        "witnesses": [],
+        "counts": {
+          "checked_child": 1000,
+          "checked_parent": 100,
+          "missing_references": 0,
+          "null_fk_rows": 0
+        }
+      },
+      {
+        "kind": "NOT_NULL",
+        "table": "child",
+        "column": "parent_id",
+        "identity": [
+          "NOT_NULL",
+          "child",
+          "parent_id"
+        ],
+        "status": "TRUSTED",
+        "validated_state": 0,
+        "validated_seq": 3,
+        "coverage": {
+          "child": 1000
+        },
+        "witnesses": [],
+        "counts": {
+          "checked": 1000,
+          "null_values": 0
+        }
+      }
+    ],
+    "after_unchecked_import": [
+      {
+        "kind": "UNIQUE",
+        "table": "parent",
+        "column": "id",
+        "identity": [
+          "UNIQUE",
+          "parent",
+          "id"
+        ],
+        "status": "TRUSTED",
+        "validated_state": 0,
+        "validated_seq": 1,
+        "coverage": {
+          "parent": 100
+        },
+        "witnesses": [],
+        "counts": {
+          "checked": 100,
+          "duplicate_values": 0
+        }
+      },
+      {
+        "kind": "FOREIGN_KEY",
+        "table": "child",
+        "column": "parent_id",
+        "parent": "parent",
+        "parent_column": "id",
+        "identity": [
+          "FOREIGN_KEY",
+          "child",
+          "parent_id",
+          "parent",
+          "id"
+        ],
+        "status": "DECLARED",
+        "validated_state": null,
+        "validated_seq": null,
+        "coverage": null,
+        "witnesses": [],
+        "counts": null
+      },
+      {
+        "kind": "NOT_NULL",
+        "table": "child",
+        "column": "parent_id",
+        "identity": [
+          "NOT_NULL",
+          "child",
+          "parent_id"
+        ],
+        "status": "DECLARED",
+        "validated_state": null,
+        "validated_seq": null,
+        "coverage": null,
+        "witnesses": [],
+        "counts": null
+      }
+    ]
+  },
+  "elimination": {
+    "inner": {
+      "physical_plan": {
+        "op": "eliminated_join",
+        "kind": "inner",
+        "original_right_table": "parent",
+        "right_table_query_reads": 0,
+        "path": "catalog",
+        "prerequisites": [
+          "referential_existence: FOREIGN_KEY(child.parent_id -> parent.id) — 孤儿行会被 INNER 删除",
+          "null_handling: NOT_NULL(child.parent_id) — 等值连接中 NULL 不匹配，NULL 子行会被删除",
+          "at_most_one_match: UNIQUE(parent.id) — 父键重复会放大行数"
+        ],
+        "evidence": {
+          "complete": true,
+          "pieces": {
+            "uniqueness_parent_key": {
+              "identity": [
+                "UNIQUE",
+                "parent",
+                "id"
+              ],
+              "status": "TRUSTED",
+              "validated_state": 0,
+              "validated_seq": 1,
+              "coverage": {
+                "parent": 100
+              },
+              "counts": {
+                "checked": 100,
+                "duplicate_values": 0
+              }
+            },
+            "referential_existence": {
+              "identity": [
+                "FOREIGN_KEY",
+                "child",
+                "parent_id",
+                "parent",
+                "id"
+              ],
+              "status": "TRUSTED",
+              "validated_state": 0,
+              "validated_seq": 2,
+              "coverage": {
+                "child": 1000,
+                "parent": 100
+              },
+              "counts": {
+                "checked_child": 1000,
+                "checked_parent": 100,
+                "missing_references": 0,
+                "null_fk_rows": 0
+              }
+            },
+            "null_handling": {
+              "identity": [
+                "NOT_NULL",
+                "child",
+                "parent_id"
+              ],
+              "status": "TRUSTED",
+              "validated_state": 0,
+              "validated_seq": 3,
+              "coverage": {
+                "child": 1000
+              },
+              "counts": {
+                "checked": 1000,
+                "null_values": 0
+              }
+            }
+          },
+          "missing": []
+        },
+        "child": {
+          "op": "scan",
+          "table": "child",
+          "filters": [],
+          "rows_read": 1000
+        }
+      },
+      "access_trace": {
+        "child": 1000
+      },
+      "rows_returned": 1000,
+      "parent_business_rows_read": 0
+    },
+    "left": {
+      "physical_plan": {
+        "op": "eliminated_join",
+        "kind": "left",
+        "original_right_table": "parent",
+        "right_table_query_reads": 0,
+        "path": "catalog",
+        "prerequisites": [
+          "LEFT 无匹配本就保留左行，仅需",
+          "at_most_one_match: UNIQUE(parent.id) — 父键重复会放大行数"
+        ],
+        "evidence": {
+          "complete": true,
+          "pieces": {
+            "uniqueness_parent_key": {
+              "identity": [
+                "UNIQUE",
+                "parent",
+                "id"
+              ],
+              "status": "TRUSTED",
+              "validated_state": 0,
+              "validated_seq": 1,
+              "coverage": {
+                "parent": 100
+              },
+              "counts": {
+                "checked": 100,
+                "duplicate_values": 0
+              }
+            }
+          },
+          "missing": []
+        },
+        "child": {
+          "op": "scan",
+          "table": "child",
+          "filters": [],
+          "rows_read": 1000
+        }
+      },
+      "access_trace": {
+        "child": 1000
+      },
+      "rows_returned": 1000,
+      "parent_business_rows_read": 0
+    },
+    "runtime_guard": {
+      "physical_plan": {
+        "op": "guarded_join",
+        "kind": "inner",
+        "original_right_table": "parent",
+        "right_table_query_reads": 0,
+        "path": "guard",
+        "prerequisites": [
+          "referential_existence: FOREIGN_KEY(child.parent_id -> parent.id) — 孤儿行会被 INNER 删除",
+          "null_handling: NOT_NULL(child.parent_id) — 等值连接中 NULL 不匹配，NULL 子行会被删除",
+          "at_most_one_match: UNIQUE(parent.id) — 父键重复会放大行数"
+        ],
+        "guard_stats": {
+          "distinct_left_keys": 100,
+          "null_left_keys": 0,
+          "parent_keys_checked": 100
+        },
+        "child": {
+          "op": "scan",
+          "table": "child",
+          "filters": [],
+          "rows_read": 1000
+        }
+      },
+      "access_trace": {
+        "child": 1000
+      }
+    }
+  },
+  "controlled_write": {
+    "rejected_batch": {
+      "constraint": [
+        "FOREIGN_KEY",
+        "child",
+        "parent_id",
+        "parent",
+        "id"
+      ],
+      "counts": {
+        "missing_references": 1
+      },
+      "witnesses": [
+        "c0"
+      ]
+    }
+  },
+  "unchecked_import": {
+    "report": {
+      "imported": 1000,
+      "state_version": 1,
+      "downgraded_qualifications": [
+        [
+          "FOREIGN_KEY",
+          "child",
+          "parent_id",
+          "parent",
+          "id"
+        ],
+        [
+          "NOT_NULL",
+          "child",
+          "parent_id"
+        ]
+      ]
+    },
+    "next_execute_plan": "join"
+  },
+  "cost_ledger": {
+    "query_rows": {
+      "child": 4000,
+      "parent": 100
+    },
+    "guard_rows": {
+      "parent": 100
+    },
+    "validation_reads": {
+      "parent": 200,
+      "child": 2000
+    },
+    "maintenance_reads": {
+      "parent": 200,
+      "child": 1000
+    },
+    "rejected_batches": {
+      "#": 1
+    },
+    "applied_batches": {},
+    "unchecked_imports": {
+      "#": 1
+    }
+  },
+  "prerequisite_explanation": {
+    "INNER": [
+      "FOREIGN_KEY(child.parent_id->parent.id) 保证非NULL子键必有父，否则孤儿/NULL子行会被INNER删除",
+      "NOT_NULL(child.parent_id) 保证子键无NULL，SQL等值连接NULL不匹配",
+      "UNIQUE(parent.id) 保证每个子键至多一个父匹配，否则父重复放大行数"
+    ],
+    "LEFT": [
+      "仅需 UNIQUE(parent.id)：LEFT无匹配时本就保留左行，NULL子键与无匹配子键都不会被丢弃"
+    ]
+  }
+}
