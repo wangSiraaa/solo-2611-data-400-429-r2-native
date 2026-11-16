@@ -1,0 +1,90 @@
+{
+  "nodes": [
+    "scan",
+    "project",
+    "filter",
+    "union_all",
+    "named",
+    "ref"
+  ],
+  "expr": [
+    "column",
+    "literal",
+    "call"
+  ],
+  "functions": {
+    "abs": {
+      "effect": "immutable",
+      "args": [
+        "int"
+      ],
+      "result": "int"
+    },
+    "run_value": {
+      "effect": "statement_stable",
+      "args": [],
+      "result": "context.run_value"
+    },
+    "next_ticket": {
+      "effect": "volatile",
+      "args": [],
+      "result": "next run-local positive integer"
+    }
+  },
+  "filter": "eq/ne/lt/le on declared columns and literals, NULL comparison is false",
+  "projection_order": "input row order, then declared output field order",
+  "named": "materialized once on first ref; inline each ref; earlier definitions only",
+  "document": {
+    "context": {
+      "run_value": "integer"
+    },
+    "named": "ordered list of name/reuse/input definitions",
+    "root": "relation node"
+  },
+  "source_rows": "Each scan row has unique row_id text and x integer within this scan. Separate scan/union/ref occurrences remain separate.",
+  "relation_fields": {
+    "scan": [
+      "op",
+      "rows"
+    ],
+    "project": [
+      "op",
+      "input",
+      "columns: ordered [output_name,expression] pairs with unique names"
+    ],
+    "filter": [
+      "op",
+      "input",
+      "condition: {op:eq|ne|lt|le,left:expression,right:expression}"
+    ],
+    "union_all": [
+      "op",
+      "left",
+      "right"
+    ],
+    "ref": [
+      "op",
+      "name"
+    ],
+    "named": "Top-level definition {name,reuse:materialized|inline,input}; refs may only name earlier definitions."
+  },
+  "expression_fields": {
+    "column": {
+      "column": "existing output field"
+    },
+    "literal": {
+      "literal": "int/text/bool/null"
+    },
+    "call": {
+      "call": "function name",
+      "args": "ordered expressions"
+    }
+  },
+  "evaluation": "Rows in input order; project output expressions in declared order; args left to right; union left before right. Filter condition operands evaluate left to right, UNKNOWN is not retained.",
+  "type_errors": "Reject malformed structure/unknown names before function execution. Runtime function errors fail the run, retaining prior call audit.",
+  "bounds": {
+    "source_x_abs": 1000000,
+    "context_abs": 1000000,
+    "root_rows": 100
+  }
+}

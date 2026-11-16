@@ -1,0 +1,149 @@
+[
+  {
+    "name": "two_volatile_fields",
+    "context": {
+      "run_value": 5
+    },
+    "named": [],
+    "root": {
+      "op": "project",
+      "input": {
+        "op": "scan",
+        "rows": [
+          {
+            "row_id": "r",
+            "x": -3
+          }
+        ]
+      },
+      "columns": [
+        [
+          "a",
+          {
+            "call": "next_ticket",
+            "args": []
+          }
+        ],
+        [
+          "b",
+          {
+            "call": "next_ticket",
+            "args": []
+          }
+        ]
+      ]
+    },
+    "expected_rows": [
+      {
+        "a": 1,
+        "b": 2
+      }
+    ]
+  },
+  {
+    "name": "materialized_ref_twice",
+    "context": {
+      "run_value": 5
+    },
+    "named": [
+      {
+        "name": "v",
+        "reuse": "materialized",
+        "input": {
+          "op": "project",
+          "input": {
+            "op": "scan",
+            "rows": [
+              {
+                "row_id": "r",
+                "x": -3
+              }
+            ]
+          },
+          "columns": [
+            [
+              "ticket",
+              {
+                "call": "next_ticket",
+                "args": []
+              }
+            ]
+          ]
+        }
+      }
+    ],
+    "root": {
+      "op": "union_all",
+      "left": {
+        "op": "ref",
+        "name": "v"
+      },
+      "right": {
+        "op": "ref",
+        "name": "v"
+      }
+    },
+    "expected_rows": [
+      {
+        "ticket": 1
+      },
+      {
+        "ticket": 1
+      }
+    ],
+    "expected_volatile_calls": 1
+  },
+  {
+    "name": "inline_ref_twice",
+    "context": {
+      "run_value": 5
+    },
+    "named": [
+      {
+        "name": "v",
+        "reuse": "inline",
+        "input": {
+          "op": "project",
+          "input": {
+            "op": "scan",
+            "rows": [
+              {
+                "row_id": "r",
+                "x": -3
+              }
+            ]
+          },
+          "columns": [
+            [
+              "ticket",
+              {
+                "call": "next_ticket",
+                "args": []
+              }
+            ]
+          ]
+        }
+      }
+    ],
+    "root": {
+      "op": "union_all",
+      "left": {
+        "op": "ref",
+        "name": "v"
+      },
+      "right": {
+        "op": "ref",
+        "name": "v"
+      }
+    },
+    "expected_rows": [
+      {
+        "ticket": 1
+      },
+      {
+        "ticket": 2
+      }
+    ],
+    "expected_volatile_calls": 2
+  }
+]
