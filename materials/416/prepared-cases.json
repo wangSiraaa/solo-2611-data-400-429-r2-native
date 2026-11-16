@@ -1,0 +1,7 @@
+{
+  "rows":[{"row_id":"a","x":15,"y":null,"flag":true},{"row_id":"b","x":25,"y":null,"flag":false}],
+  "initial_partial":{"op":"ge","column":"x","value":0},
+  "query":{"op":"ge","column":"x","value":10},
+  "replacement_partial":{"op":"ge","column":"x","value":20},
+  "expected_result_ids":["a","b"]
+}
