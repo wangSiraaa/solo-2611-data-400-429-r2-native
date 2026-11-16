@@ -1,0 +1,59 @@
+[
+  {
+    "data": {
+      "orders": [
+        {
+          "id": "o1",
+          "lines": [
+            {
+              "id": "l1",
+              "qty": 2
+            }
+          ]
+        }
+      ]
+    },
+    "hasNext": true
+  },
+  {
+    "incremental": [
+      {
+        "path": [
+          "orders",
+          0,
+          "lines",
+          1
+        ],
+        "items": [
+          {
+            "id": "l2",
+            "qty": 3
+          }
+        ]
+      }
+    ],
+    "hasNext": true
+  },
+  {
+    "incremental": [
+      {
+        "path": [
+          "orders",
+          0
+        ],
+        "data": null,
+        "errors": [
+          {
+            "message": "tax must not be null",
+            "path": [
+              "orders",
+              0,
+              "tax"
+            ]
+          }
+        ]
+      }
+    ],
+    "hasNext": false
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "data": {
+      "orders": [
+        {
+          "id": "o1",
+          "lines": [
+            {
+              "id": "l1",
+              "qty": 2
+            }
+          ]
+        }
+      ]
+    },
+    "hasNext": true
+  }
+]
