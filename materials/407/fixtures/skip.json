@@ -1,0 +1,24 @@
+{
+  "cycles": [
+    [
+      {
+        "id": "before",
+        "sql": "SELECT value FROM counter"
+      },
+      {
+        "id": "bad",
+        "sql": "SELECT missing FROM counter"
+      },
+      {
+        "id": "ignored",
+        "sql": "UPDATE counter SET value=value+100"
+      }
+    ],
+    [
+      {
+        "id": "after",
+        "sql": "SELECT value FROM counter"
+      }
+    ]
+  ]
+}

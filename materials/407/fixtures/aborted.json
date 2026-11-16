@@ -1,0 +1,36 @@
+{
+  "cycles": [
+    [
+      {
+        "id": "begin",
+        "sql": "BEGIN"
+      },
+      {
+        "id": "bad",
+        "sql": "SELECT missing FROM counter"
+      },
+      {
+        "id": "ignored",
+        "sql": "UPDATE counter SET value=999"
+      }
+    ],
+    [
+      {
+        "id": "still-aborted",
+        "sql": "SELECT value FROM counter"
+      }
+    ],
+    [
+      {
+        "id": "rollback",
+        "sql": "ROLLBACK"
+      }
+    ],
+    [
+      {
+        "id": "read",
+        "sql": "SELECT value FROM counter"
+      }
+    ]
+  ]
+}

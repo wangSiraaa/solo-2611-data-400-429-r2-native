@@ -1,0 +1,14 @@
+{
+  "cycles": [
+    [
+      {
+        "id": "q1",
+        "sql": "SELECT value FROM counter"
+      },
+      {
+        "id": "q2",
+        "sql": "SELECT value+1 FROM counter"
+      }
+    ]
+  ]
+}
